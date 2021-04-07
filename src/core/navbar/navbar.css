@@ -46,6 +46,31 @@
 }
 
 .category-list {
+  z-index: 10;
   position: fixed;
-  top: 1rem;
+  top: 7.3rem;
+  left: 8rem;
+  width: 30vw;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border: 1px solid #b8b8b8;
+}
+
+.cl-section {
+  padding: 0.75rem 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+  display: block;
+}
+
+li:hover {
+  background: rgba(184, 184, 184, 0.3);
 }

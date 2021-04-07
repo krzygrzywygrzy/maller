@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Link } from "wouter";
 import Basket from "../../interfaces/basket";
 import "./navbar.css";
-import React ,{ useState } from 'react';
+import { useState } from 'react';
 import CategoryList from "./categoryList";
 
 
@@ -12,7 +12,7 @@ const Navbar = (props: any) => {
 
   //props
   let basket: Basket = props.basket;
-  
+
 
   const handleChange = (phrase: String) => {
     //TODO: search in db
@@ -36,11 +36,11 @@ const Navbar = (props: any) => {
       <div className="category-container">
         <div className="categories" onClick={()=> {setShowCategory(!showCategory)}}>
             Categories
-            {showCategory && <CategoryList />} 
         </div>
         <div className="side-category">Sale!</div>
         <div className="side-category">Spring Sale!</div>
       </div>
+      {showCategory && <CategoryList />} 
     </div>
   );
 };
