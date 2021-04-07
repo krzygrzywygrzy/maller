@@ -1,8 +1,10 @@
-const initState: Object = {
-    items: Array
+import Basket from "../../interfaces/basket";
+
+const initState: Basket = {
+    items: [],
 };
 
-const shoppingBasketReducer = (state = initState, action: String) => {
+const shoppingBasketReducer = (state: Basket = initState, action: String) => {
     switch(action){
         default:
             break;
