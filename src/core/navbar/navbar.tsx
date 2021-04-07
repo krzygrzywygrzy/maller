@@ -1,24 +1,54 @@
-import { connect } from 'react-redux';
-import Basket from '../../interfaces/basket';
-import './navbar.css';
+import { connect } from "react-redux";
+import { Link } from "wouter";
+import Basket from "../../interfaces/basket";
+import "./navbar.css";
+import React ,{ useState } from 'react';
+import CategoryList from "./categoryList";
+
+
 
 const Navbar = (props: any) => {
-    let basket: Basket = props.basket;
-    console.log(basket);
+  const [showCategory, setShowCategory] = useState<Boolean>(false); 
 
-    return (
-        <div className="navbar-container">
-            <div>Shopping</div>
-            <div>Searchbar</div>
-            <div>basket {basket.items.length}</div>
+  //props
+  let basket: Basket = props.basket;
+  
+
+  const handleChange = (phrase: String) => {
+    //TODO: search in db
+  }
+
+  return (
+    <div className="navbar">
+      <div className="navbar-container">
+        <div>Shopping</div>
+        <div>
+            <div className="search-box">
+              <input type="text" onChange={(e)=> handleChange(e.target.value) } 
+                placeholder="toys, health, sports..." />
+              <div>Search</div>   
+            </div>
         </div>
-    );
-}
+        <div>
+          <Link href="/basket">basket {basket.items.length}</Link>
+        </div>
+      </div>
+      <div className="category-container">
+        <div className="categories" onClick={()=> {setShowCategory(!showCategory)}}>
+            Categories
+            {showCategory && <CategoryList />} 
+        </div>
+        <div className="side-category">Sale!</div>
+        <div className="side-category">Spring Sale!</div>
+      </div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: any) => {
-    return {
-        basket: state.basket,
-    }
-}
+  return {
+    basket: state.basket,
+  };
+};
 
 export default connect(mapStateToProps)(Navbar);

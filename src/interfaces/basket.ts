@@ -1,5 +1,7 @@
+import Product from "./product";
+
 interface Basket {
-    items: Array<any>, //TODO: change for shopping item when model ready
+    items: Array<Product>
 }
 
 export default Basket;
