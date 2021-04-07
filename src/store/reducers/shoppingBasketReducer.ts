@@ -8,7 +8,7 @@ const initState: Basket = {
 type Action = | { type: "ADD_ITEM", payload: Product };
 
 const shoppingBasketReducer = (state: Basket = initState, action: Action) => {
-    switch(action){
+    switch(action.type){
         default:
             break;
     }

@@ -24,10 +24,3 @@ input[type="text"] {
 input[type="text"]:focus {
   outline: none;
 }
-
-.search-box {
-  border: 1px solid #b8b8b8;
-  width: 35vw;
-  padding: 0.5rem;
-  display: flex;
-}
