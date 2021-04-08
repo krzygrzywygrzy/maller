@@ -1,22 +1,17 @@
-import Categories from "../../interfaces/categories"
+import { Category } from "../../interfaces/categories"
 
-const initState: Categories = {
-    main: [
-        "Music", "Books", "Films", "Health", "Home", "Electronics"
-    ],
-    sub: [
-        ["Top Hits", "Rock", "Metal"],
-        ["Best Sellers", "Thrillers", "Romances"],
-        ["Top Hits", "Horrors", "Superheroes"],
-        ["Sport Accesories", "Higiene",],
-        ["Accesories", "Furniture"],
-        ["Smartphones", "Computers", "Tablets"],
-    ]
-} 
 
-type Action = | {type: "LOAD_CATEGORIES", payload: Categories};
+const initState: Array<Category> = [];
+ 
+
+type Action = | {type: "LOAD_CATEGORIES", payload: Array<Category>};
 
 const categoryReducer = (state = initState, action: Action) => {
+    switch(action.type){
+        case "LOAD_CATEGORIES":
+            state = action.payload;
+    }
+
     return state;
 }
 

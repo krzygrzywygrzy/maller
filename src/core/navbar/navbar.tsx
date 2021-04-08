@@ -2,8 +2,10 @@ import { connect } from "react-redux";
 import { Link } from "wouter";
 import Basket from "../../interfaces/basket";
 import "./navbar.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CategoryList from "./categoryList";
+import { getCategoryAction } from "../../store/actions/categoryActions";
+import Categories, { Category } from "../../interfaces/categories";
 
 
 
@@ -12,7 +14,13 @@ const Navbar = (props: any) => {
 
   //props
   let basket: Basket = props.basket;
+  let categories: Array<Category> = props.categories;
+  let getCategories: Function = props.getCategories;
 
+  useEffect(()=> {
+    if(categories.length === 0)
+      getCategories();
+  },[]);
 
   const handleChange = (phrase: String) => {
     //TODO: search in db
@@ -48,7 +56,14 @@ const Navbar = (props: any) => {
 const mapStateToProps = (state: any) => {
   return {
     basket: state.basket,
+    categories: state.categories,
   };
 };
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    getCategories: () => dispatch(getCategoryAction()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import Categories from '../../interfaces/categories';
+import Categories, { Category } from '../../interfaces/categories';
 import { Link } from 'wouter';
 
 const CategoryList = (props: any) => {
@@ -8,14 +8,18 @@ const CategoryList = (props: any) => {
     const [subcat, setSub] = useState<any | null>(null);
     
     //props
-    const categories: Categories = props.categories;
+    const categories: Array<Category> = props.categories;
 
     useEffect(() => {
         //TODO: resolve missing dependency 'categories.main' warning
 
         const displaySubmenu = (e: any) => {
             if(e.target.tagName === "LI" && e.target.id === "main-cat"){
-                let index: Number = categories.main.indexOf(e.target.innerText);
+                let index: Number = subcat;
+                categories.forEach((el: Category, i: Number) => {
+                    if(el.main === e.target.innerText)
+                        index = i;
+                });
                 setSub(index);
             }
         }
@@ -31,9 +35,9 @@ const CategoryList = (props: any) => {
         <div className="category-list">
             <div className="cl-section border-right">
                 <ul>
-                    {categories.main.map((el, index) => {
+                    {categories.map((el, index) => {
                         return <li key={index} id="main-cat">
-                            <Link href="/results">{el}</Link>
+                            <Link href="/results">{el.main}</Link>
                         </li>;
                     })}
                 </ul>
@@ -42,7 +46,7 @@ const CategoryList = (props: any) => {
                 {subcat === null ? <div></div> : 
                 <div>
                     <ul>
-                        {categories.sub[subcat].map((el, index)=> {
+                        {categories[subcat].sub.map((el, index)=> {
                            return <li key={index}>
                                <Link href="/results">{el}</Link>
                             </li>;

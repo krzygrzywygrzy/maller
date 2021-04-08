@@ -5,13 +5,14 @@ import reportWebVitals from './reportWebVitals';
 import { Route } from 'wouter';
 import Home from './pages/home/home';
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './store/reducers/rootReducer';
 import Basket from './pages/basket/basket';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <React.StrictMode>
