@@ -1,6 +1,7 @@
 .navbar {
   position: sticky;
   position: -webkit-sticky;
+  background: white;
 }
 
 .navbar-container {
@@ -54,6 +55,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   border: 1px solid #b8b8b8;
+  background: white;
 }
 
 .cl-section {
