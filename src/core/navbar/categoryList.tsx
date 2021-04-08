@@ -13,7 +13,7 @@ const CategoryList = (props: any) => {
     useEffect(() => {
         //TODO: resolve missing dependency 'categories.main' warning
 
-        const displaySubmenu = (e: any) => {
+        const displaySubmenu = (e) => {
             if(e.target.tagName === "LI" && e.target.id === "main-cat"){
                 let index: Number = subcat;
                 categories.forEach((el: Category, i: Number) => {
@@ -23,7 +23,7 @@ const CategoryList = (props: any) => {
                 setSub(index);
             }
         }
-
+        
         document.addEventListener("mouseover", displaySubmenu);
         
         return () => {
@@ -32,13 +32,13 @@ const CategoryList = (props: any) => {
     }, []);
 
     return (
-        <div className="category-list">
+        <div className="category-list" id="category-list">
             <div className="cl-section border-right">
                 <ul>
                     {categories.map((el, index) => {
-                        return <li key={index} id="main-cat">
-                            <Link href="/results">{el.main}</Link>
-                        </li>;
+                        return <Link href={`/results/${el.main}`}><li key={index} id="main-cat">
+                            {el.main}
+                        </li></Link>;
                     })}
                 </ul>
             </div>
@@ -47,9 +47,9 @@ const CategoryList = (props: any) => {
                 <div>
                     <ul>
                         {categories[subcat].sub.map((el, index)=> {
-                           return <li key={index}>
-                               <Link href="/results">{el}</Link>
-                            </li>;
+                           return <Link href={`/results/${categories[subcat].main}/${el}`}><li key={index}>
+                               {el}
+                            </li></Link>;
                         })}
                     </ul>
                 </div>}

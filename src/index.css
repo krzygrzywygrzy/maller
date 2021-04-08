@@ -25,3 +25,7 @@ input[type="text"] {
 input[type="text"]:focus {
   outline: none;
 }
+
+.container {
+  margin: 2rem 8rem;
+}

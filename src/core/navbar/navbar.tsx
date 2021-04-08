@@ -2,15 +2,16 @@ import { connect } from "react-redux";
 import { Link } from "wouter";
 import Basket from "../../interfaces/basket";
 import "./navbar.css";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CategoryList from "./categoryList";
 import { getCategoryAction } from "../../store/actions/categoryActions";
-import Categories, { Category } from "../../interfaces/categories";
+import Category from "../../interfaces/categories";
 
 
 
 const Navbar = (props: any) => {
   const [showCategory, setShowCategory] = useState<Boolean>(false); 
+  const menuRef = useRef(null);
 
   //props
   let basket: Basket = props.basket;
@@ -22,6 +23,14 @@ const Navbar = (props: any) => {
       getCategories();
   },[]);
 
+  useEffect(() => {
+    //TODO: close menu after clicking outside of it
+    if(showCategory){
+      
+    }
+
+  }, [showCategory]);
+
   const handleChange = (phrase: String) => {
     //TODO: search in db
   }
@@ -29,7 +38,7 @@ const Navbar = (props: any) => {
   return (
     <div className="navbar">
       <div className="navbar-container">
-        <div>Shopping</div>
+        <div><Link href="/">Shopping</Link></div>
         <div>
             <div className="search-box">
               <input type="text" onChange={(e)=> handleChange(e.target.value) } 
@@ -48,7 +57,7 @@ const Navbar = (props: any) => {
         <div className="side-category">Sale!</div>
         <div className="side-category">Spring Sale!</div>
       </div>
-      {showCategory && <CategoryList />} 
+      {showCategory && <CategoryList ref={menuRef} />} 
     </div>
   );
 };
@@ -67,3 +76,5 @@ const mapDispatchToProps = (dispatch: Function) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+
+

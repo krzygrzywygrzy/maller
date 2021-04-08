@@ -1,0 +1,24 @@
+.basket-container {
+  display: grid;
+  grid-template-columns: 6fr 2fr;
+}
+
+.item-list {
+  background: white;
+  padding: 1rem;
+  min-height: 30vh;
+  border: 1px solid #e6e6e6;
+  margin-right: 8rem;
+}
+
+.basket-summary {
+  background: white;
+  border: 1px solid #e6e6e6;
+}
+
+.empty-list {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 1.25rem;
+}

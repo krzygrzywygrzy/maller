@@ -9,7 +9,8 @@ import { createStore, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './store/reducers/rootReducer';
-import Basket from './pages/basket/basket';
+import BasketPage from './pages/basket/basket';
+import ResultsPage from './pages/results/results';
 
 const store = createStore(
   rootReducer, applyMiddleware(thunk));
@@ -18,7 +19,10 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Route path="/"><Home/></Route>
-      <Route path="/basket"><Basket/></Route>
+      <Route path="/basket"><BasketPage/></Route>
+      <Route path="/results/:main">
+        <ResultsPage />
+      </Route>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
