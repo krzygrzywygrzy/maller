@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { db } from "../../services/firebase.config"
 import firebase from "firebase";
-import Categories, { Category } from "../../interfaces/categories";
+import Category from "../../interfaces/categories";
 
 const getCategoryAction = () => {
     return async (dispatch: Dispatch) => {

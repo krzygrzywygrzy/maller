@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import Categories, { Category } from '../../interfaces/categories';
+import Category  from '../../interfaces/categories';
 import { Link } from 'wouter';
 
 const CategoryList = (props: any) => {

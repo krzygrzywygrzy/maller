@@ -1,9 +1,7 @@
-import { Category } from "../../interfaces/categories"
-
+import Category from "../../interfaces/categories"
 
 const initState: Array<Category> = [];
  
-
 type Action = | {type: "LOAD_CATEGORIES", payload: Array<Category>};
 
 const categoryReducer = (state = initState, action: Action) => {
@@ -11,7 +9,6 @@ const categoryReducer = (state = initState, action: Action) => {
         case "LOAD_CATEGORIES":
             state = action.payload;
     }
-
     return state;
 }
 
