@@ -9,20 +9,17 @@ import Category from "../../interfaces/categories";
 import { rootState } from "../../store/reducers/rootReducer";
 
 interface NavbarProps {
-  basket?: Basket;
-  categories?: Array<Category>;
-  getCategories?: Function;
+  basket: Basket;
+  categories: Array<Category>;
+  getCategories: Function;
 }
 
-const Navbar: React.FC<NavbarProps> = (props: any) => {
+const Navbar: React.FC<NavbarProps> = ({
+  basket,
+  categories,
+  getCategories,
+}: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<Boolean>(false);
-  const menuRef = useRef(null);
-
-  //props
-  //TODO: get props by like ({basket}: NavbarProps)
-  let basket: Basket = props.basket;
-  let categories: Array<Category> = props.categories;
-  let getCategories: Function = props.getCategories;
 
   useEffect(() => {
     if (categories.length === 0) getCategories();
@@ -36,6 +33,10 @@ const Navbar: React.FC<NavbarProps> = (props: any) => {
 
   const handleChange = (phrase: String) => {
     //TODO: search in db
+  };
+
+  const closeMenu = () => {
+    setShowCategory(false);
   };
 
   return (
@@ -56,7 +57,9 @@ const Navbar: React.FC<NavbarProps> = (props: any) => {
         </div>
         <div className="navbar-options">
           <div>Account</div>
-          <Link href="/basket">basket {basket.items.length}</Link>
+          <Link href="/basket" onClick={() => closeMenu()}>
+            basket {basket.items.length}
+          </Link>
         </div>
       </div>
       <div className="category-container">
@@ -71,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = (props: any) => {
         <div className="side-category">Sale!</div>
         <div className="side-category">Spring Sale!</div>
       </div>
-      {showCategory && <CategoryList ref={menuRef} />}
+      {showCategory && <CategoryList close={closeMenu} />}
     </div>
   );
 };

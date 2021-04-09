@@ -1,6 +1,5 @@
 import { Action, ActionCreator } from "redux";
 import { db } from "../../services/firebase.config";
-import firebase from "firebase";
 import Category from "../../interfaces/categories";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { rootState } from "../reducers/rootReducer";

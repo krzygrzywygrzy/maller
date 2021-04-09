@@ -9,9 +9,11 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
   main,
   sub,
 }: ResultsPageProps) => {
-  console.log(main, sub);
-
-  return <div>Results</div>;
+  return (
+    <div>
+      {main} {sub}
+    </div>
+  );
 };
 
 export default ResultsPage;

@@ -2,13 +2,22 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Category from "../../interfaces/categories";
 import { Link } from "wouter";
+import { rootState } from "../../store/reducers/rootReducer";
 
-const CategoryList = (props: any) => {
+interface CategoryListProps {
+  categories: Array<Category>;
+  close: Function;
+}
+
+const CategoryList: React.FC<CategoryListProps> = ({
+  categories,
+  close,
+}: CategoryListProps) => {
   //TODO: resolve Type 'Number' cannot be used as an index type.
   const [subcat, setSub] = useState<any | null>(null);
 
   //props
-  const categories: Array<Category> = props.categories;
+  //const categories: Array<Category> = props.categories;
 
   useEffect(() => {
     //TODO: resolve missing dependency 'categories.main' warning
@@ -16,6 +25,7 @@ const CategoryList = (props: any) => {
     const displaySubmenu = (e) => {
       if (e.target.tagName === "LI" && e.target.id === "main-cat") {
         let index: Number = subcat;
+
         categories.forEach((el: Category, i: Number) => {
           if (el.main === e.target.innerText) index = i;
         });
@@ -36,7 +46,11 @@ const CategoryList = (props: any) => {
         <ul>
           {categories.map((el, index) => {
             return (
-              <Link key={index} href={`/results/${el.main}/none`}>
+              <Link
+                key={index}
+                href={`/results/${el.main}/none`}
+                onClick={() => close()}
+              >
                 <li id="main-cat">{el.main}</li>
               </Link>
             );
@@ -54,6 +68,7 @@ const CategoryList = (props: any) => {
                   <Link
                     key={index}
                     href={`/results/${categories[subcat].main}/${el}`}
+                    onClick={() => close()}
                   >
                     <li>{el}</li>
                   </Link>
@@ -67,7 +82,7 @@ const CategoryList = (props: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: rootState) => {
   return {
     categories: state.categories,
   };
