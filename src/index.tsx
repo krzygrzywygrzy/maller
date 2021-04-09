@@ -19,14 +19,16 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <div className="content-wrapper">
-        <Route path="/"><Home/></Route>
-        <Route path="/basket"><BasketPage/></Route>
-        <Route path="/results/:main">
-          <ResultsPage />
-        </Route>
+      <div className="page">
+        <div className="content-wrapper">
+          <Route path="/"><Home/></Route>
+          <Route path="/basket"><BasketPage/></Route>
+          <Route path="/results/:main">
+            <ResultsPage />
+          </Route>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

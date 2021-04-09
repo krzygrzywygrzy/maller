@@ -11,17 +11,20 @@
 }
 
 .navbar-container {
+  width: 1000px;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 8rem;
+  padding: 1rem 0;
   border-bottom: 1px solid #e6e6e6;
+  margin: auto;
 }
 
 .navbar-title {
   font-size: 2rem;
   font-family: "Oswald", sans-serif;
+  margin-left: 1rem;
 }
 
 .search-box {
@@ -39,7 +42,8 @@
 }
 
 .category-container {
-  padding: 0 8rem;
+  width: 1000px;
+  margin: auto;
   border-bottom: 1px solid #e6e6e6;
   display: flex;
   align-items: center;
@@ -47,9 +51,9 @@
 
 .categories {
   display: inline-block;
-  border-left: 1px solid #e6e6e6;
-  border-right: 1px solid #e6e6e6;
-  padding: 0.75rem 0.5rem;
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding: 0.75rem 1rem;
   cursor: pointer;
 }
 
@@ -60,8 +64,8 @@
 .category-list {
   z-index: 10;
   position: fixed;
-  top: 7.3rem;
-  left: 8rem;
+  top: 8.25rem;
+  left: calc((100vw - 1000px) / 2);
   width: 30vw;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -94,4 +98,12 @@ li:hover {
 
 .search_btn {
   color: black;
+}
+
+.navbar-options {
+  display: flex;
+}
+
+.navbar-options > div {
+  margin-right: 1rem;
 }

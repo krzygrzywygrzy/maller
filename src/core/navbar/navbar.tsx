@@ -46,7 +46,8 @@ const Navbar = (props: any) => {
               <div className="search_btn">Search</div>   
             </div>
         </div>
-        <div>
+        <div className="navbar-options">
+          <div>Account</div>
           <Link href="/basket">basket {basket.items.length}</Link>
         </div>
       </div>

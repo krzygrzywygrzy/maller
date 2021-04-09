@@ -3,7 +3,9 @@ import './footer.css';
 const Footer = () => {
     return (
         <footer>
-            <span>maller &copy; all rights reserved</span>
+            <div>
+                <span>maller &copy; all rights reserved</span>
+            </div>
         </footer>
     );
 }
