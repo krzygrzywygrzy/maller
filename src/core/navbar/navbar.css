@@ -44,7 +44,6 @@
 .category-container {
   width: 1000px;
   margin: auto;
-  border-bottom: 1px solid #e6e6e6;
   display: flex;
   align-items: center;
 }
@@ -83,12 +82,13 @@ ul {
 }
 
 li {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   display: block;
 }
 
-li:hover {
+li:hover,
+.categories:hover {
   background: rgba(184, 184, 184, 0.3);
 }
 

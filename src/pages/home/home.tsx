@@ -1,13 +1,7 @@
-import Navbar from '../../core/navbar/navbar';
-
 const Home = () => {
-    document.title = "maller"
+  document.title = "maller";
 
-    return (
-        <div>
-            <Navbar/>
-        </div>
-    );
-}
+  return <div></div>;
+};
 
 export default Home;

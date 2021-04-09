@@ -1,20 +1,30 @@
-import { Dispatch } from "redux";
-import { db } from "../../services/firebase.config"
+import { Action, ActionCreator } from "redux";
+import { db } from "../../services/firebase.config";
 import firebase from "firebase";
 import Category from "../../interfaces/categories";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { rootState } from "../reducers/rootReducer";
 
-const getCategoryAction = () => {
-    return async (dispatch: Dispatch) => {
-        let categories: Array<Category> = [];
+const getCategoryAction: ActionCreator<
+  ThunkAction<Promise<void>, rootState, void, Action>
+> = () => {
+  return async (
+    dispatch: ThunkDispatch<rootState, void, Action>
+  ): Promise<void> => {
+    let categories: Array<Category> = [];
 
-        const snapshot: firebase.firestore.QuerySnapshot = await db.collection("categories").get();
-        const res = await snapshot.docs;
-        res.forEach((el) => {
-            categories.push({main: el.data().main, sub: el.data().sub});
+    db.collection("categories")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((el) => {
+          categories.push({ main: el.data().main, sub: el.data().sub });
         });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    dispatch({ type: "LOAD_CATEGORIES", payload: categories });
+  };
+};
 
-        dispatch({type: "LOAD_CATEGORIES", payload: categories});
-    }
-}
-
-export { getCategoryAction }
+export { getCategoryAction };

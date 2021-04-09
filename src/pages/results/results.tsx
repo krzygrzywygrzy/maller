@@ -1,10 +1,17 @@
-import Navbar from "../../core/navbar/navbar"
+import React from "react";
 
-const ResultsPage = () => {
-    return (<div>
-        <Navbar />
-        Results
-    </div>);
+interface ResultsPageProps {
+  main?: String;
+  sub?: String;
 }
+
+const ResultsPage: React.FC<ResultsPageProps> = ({
+  main,
+  sub,
+}: ResultsPageProps) => {
+  console.log(main, sub);
+
+  return <div>Results</div>;
+};
 
 export default ResultsPage;
