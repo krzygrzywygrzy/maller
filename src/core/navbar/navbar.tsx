@@ -38,12 +38,12 @@ const Navbar = (props: any) => {
   return (
     <div className="navbar">
       <div className="navbar-container">
-        <div><Link href="/">Shopping</Link></div>
+        <div className="navbar-title"><Link href="/">maller</Link></div>
         <div>
             <div className="search-box">
               <input type="text" onChange={(e)=> handleChange(e.target.value) } 
                 placeholder="toys, health, sports..." />
-              <div>Search</div>   
+              <div className="search_btn">Search</div>   
             </div>
         </div>
         <div>

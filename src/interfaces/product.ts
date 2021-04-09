@@ -5,7 +5,7 @@ interface Product {
     price: Number,
     category: String,
     inStock: Number,
-    image: String, // base64 string image
+    image?: String, // base64 string image
 }
 
 export default Product;

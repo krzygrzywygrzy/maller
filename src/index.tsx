@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './store/reducers/rootReducer';
 import BasketPage from './pages/basket/basket';
 import ResultsPage from './pages/results/results';
+import Footer from './core/footer/footer';
 
 const store = createStore(
   rootReducer, applyMiddleware(thunk));
@@ -18,11 +19,14 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Route path="/"><Home/></Route>
-      <Route path="/basket"><BasketPage/></Route>
-      <Route path="/results/:main">
-        <ResultsPage />
-      </Route>
+      <div className="content-wrapper">
+        <Route path="/"><Home/></Route>
+        <Route path="/basket"><BasketPage/></Route>
+        <Route path="/results/:main">
+          <ResultsPage />
+        </Route>
+      </div>
+      <Footer />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

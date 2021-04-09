@@ -1,0 +1,15 @@
+footer {
+  height: 4rem;
+  background: #373f51;
+  color: white;
+  line-height: 4rem;
+  font-weight: 400;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+footer > span {
+  margin: 0 8rem;
+}

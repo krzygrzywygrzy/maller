@@ -2,7 +2,9 @@ import Basket from "../../interfaces/basket";
 import Product from "../../interfaces/product";
 
 const initState: Basket = {
-    items: [],
+    items: [
+        // {name: "DVD", price: 13, category: "Music", inStock: 13, image: ""}
+    ],
 };
 
 type Action = | { type: "ADD_ITEM", payload: Product };

@@ -17,8 +17,10 @@
 }
 
 .empty-list {
+  color: gray;
+  height: 30vh;
   display: flex;
-  align-items: center;
-  height: 100%;
+  flex-direction: column;
+  justify-content: center;
   font-size: 1.25rem;
 }
