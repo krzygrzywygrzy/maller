@@ -1,0 +1,27 @@
+.form-container {
+  background: white;
+  padding: 1rem;
+  width: 40%;
+  border: 1px solid #e6e6e6;
+}
+
+.input-container {
+  margin-bottom: 1rem;
+}
+
+.input-container > input {
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 1rem;
+  transition: all 0.3s ease-in;
+}
+
+.input-container > input:focus {
+  border-bottom: 1px solid #f19c79;
+}
+
+.form-title {
+  color: #f19c79;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}

@@ -4,6 +4,11 @@ import Category from "../../interfaces/categories";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { rootState } from "../reducers/rootReducer";
 
+/**
+ * Redux Thunk action for categories
+ * gets cateogry list from firebase
+ * dispatches {categoryReducer} 'LOAD_CATEGORIES' action
+ */
 const getCategoryAction: ActionCreator<
   ThunkAction<Promise<void>, rootState, void, Action>
 > = () => {

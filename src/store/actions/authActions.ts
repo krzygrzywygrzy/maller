@@ -3,6 +3,18 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { auth } from "../../services/firebase.config";
 import { rootState } from "../reducers/rootReducer";
 
+/**
+ * Redux Thunk actions for user authorization
+ */
+
+/**
+ * handles user sign up
+ *
+ * @param email -> email user provides in SignUpPage
+ * @param password -> password user provides in SignUpPAge
+ *
+ * dispatches {authReducer} action
+ */
 const signUpAction: ActionCreator<
   ThunkAction<Promise<void>, rootState, void, Action>
 > = (email: string, password: string) => {
@@ -20,6 +32,15 @@ const signUpAction: ActionCreator<
   };
 };
 
+/**
+ * handles user login
+ *
+ * @param email -> email user provides in LogInPage
+ * @param password -> password user provides in LogInPage
+ *
+ *  dispatches {authReducer} action
+ */
+
 const logInAction: ActionCreator<
   ThunkAction<Promise<void>, rootState, void, Action>
 > = (email: string, password: string) => {
@@ -28,4 +49,4 @@ const logInAction: ActionCreator<
   };
 };
 
-export { signUpAction };
+export { signUpAction, logInAction };

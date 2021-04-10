@@ -32,12 +32,12 @@ a {
   text-decoration: none;
 }
 
-input[type="text"] {
+input {
   border: none;
   width: 95%;
   font-family: "Quicksand", sans-serif;
 }
-input[type="text"]:focus {
+input:focus {
   outline: none;
 }
 

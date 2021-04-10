@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Link } from "wouter";
 import Basket from "../../interfaces/basket";
 import "./navbar.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import CategoryList from "./categoryList";
 import { getCategoryAction } from "../../store/actions/categoryActions";
 import Category from "../../interfaces/categories";
@@ -25,12 +25,6 @@ const Navbar: React.FC<NavbarProps> = ({
     if (categories.length === 0) getCategories();
   }, []);
 
-  useEffect(() => {
-    //TODO: close menu after clicking outside of it
-    if (showCategory) {
-    }
-  }, [showCategory]);
-
   const handleChange = (phrase: String) => {
     //TODO: search in db
   };
@@ -52,7 +46,9 @@ const Navbar: React.FC<NavbarProps> = ({
               onChange={(e) => handleChange(e.target.value)}
               placeholder="toys, health, sports..."
             />
-            <div className="search_btn">Search</div>
+            <div className="search_btn">
+              <span>search</span>
+            </div>
           </div>
         </div>
         <div className="navbar-options">
