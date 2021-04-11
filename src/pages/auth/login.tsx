@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "wouter";
 import { logInAction } from "../../store/actions/authActions";
 import "./auth.css";
 
@@ -15,7 +16,7 @@ const LogInPage: React.FC<LogInPageProps> = ({
 
   const handleSubmit = () => {
     //TODO: check if email has proper format
-    console.log("submit!");
+    logInAction(email, password);
   };
 
   return (
@@ -43,6 +44,7 @@ const LogInPage: React.FC<LogInPageProps> = ({
           />
         </div>
         <button onClick={handleSubmit}>Log in</button>
+        <Link href="/signup">Sign Up</Link>
       </div>
     </div>
   );
