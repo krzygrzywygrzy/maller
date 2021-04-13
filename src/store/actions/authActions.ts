@@ -30,7 +30,7 @@ const signUpAction: ActionCreator<
         if (userCredential.user?.uid !== undefined) {
           user.uid = userCredential.user.uid;
           db.collection("users").doc(userCredential.user.uid).set(user);
-          authenticate(userCredential, dispatch);
+          authenticate(userCredential.user, dispatch);
         }
       })
       .catch((err) => {
@@ -53,8 +53,10 @@ const logInAction: ActionCreator<
   return async (dispatch: ThunkDispatch<rootState, void, AuthAction>) => {
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((userCredentail) => {
-        authenticate(userCredentail, dispatch);
+      .then((userCredential) => {
+        console.log(userCredential);
+        if (userCredential.user !== null)
+          authenticate(userCredential.user, dispatch);
       })
       .catch((err) => {
         showSnackBar("Cannot log in!");
@@ -63,10 +65,22 @@ const logInAction: ActionCreator<
 };
 
 const authenticate = (
-  userCredential: firebase.auth.UserCredential,
+  user: firebase.User,
   dispatch: ThunkDispatch<rootState, void, AuthAction>
 ) => {
-  console.log(userCredential);
+  const docRef = db.collection("users").doc(user.uid);
+  docRef
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        console.log(doc.data());
+      } else {
+        showSnackBar("No such user!");
+      }
+    })
+    .catch((_) => {
+      showSnackBar("Cannot log in!");
+    });
 };
 
 const logOutAction: ActionCreator<
