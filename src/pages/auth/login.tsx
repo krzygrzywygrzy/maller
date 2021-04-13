@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "wouter";
+import useLocation from "wouter/use-location";
 import { logInAction } from "../../store/actions/authActions";
 import "./auth.css";
 
@@ -14,13 +15,12 @@ const LogInPage: React.FC<LogInPageProps> = ({
   const [email, setEmail] = useState<String>("");
   const [password, setPassword] = useState<String>("");
 
-
+  const [location, setLocation] = useLocation();
 
   const handleSubmit = () => {
     //TODO: check if email has proper format
-    logInAction(email, password);
+    logInAction(email, password, () => setLocation("/"));
   };
-
 
   document.title = "maller - log in";
   return (
@@ -56,8 +56,8 @@ const LogInPage: React.FC<LogInPageProps> = ({
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    logInAction: (email: string, password: string) =>
-      dispatch(logInAction(email, password)),
+    logInAction: (email: string, password: string, redirect: Function) =>
+      dispatch(logInAction(email, password, redirect)),
   };
 };
 

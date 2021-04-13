@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import User from "../../interfaces/user";
 import { signUpAction } from "../../store/actions/authActions";
 import "./auth.css";
@@ -17,9 +17,13 @@ const SignUpPage: React.FC<LogInPageProps> = ({
   const [name, setName] = useState<String>("");
   const [surname, setSurname] = useState<String>("");
 
+  const [location, setLocation] = useLocation();
+
   const handleSubmit = () => {
     //TODO: check if data is correct
-    signUpAction(password, { name: name, surname: surname, email: email });
+    signUpAction(password, { name: name, surname: surname, email: email }, () =>
+      setLocation("/")
+    );
   };
 
   document.title = "maller - sign up";
@@ -74,8 +78,8 @@ const SignUpPage: React.FC<LogInPageProps> = ({
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    signUpAction: (password: string, user: User) =>
-      dispatch(signUpAction(password, user)),
+    signUpAction: (password: string, user: User, redirect: Function) =>
+      dispatch(signUpAction(password, user, redirect)),
   };
 };
 
