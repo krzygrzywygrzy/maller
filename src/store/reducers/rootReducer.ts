@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import Basket from "../../interfaces/basket";
 import Category from "../../interfaces/categories";
+import User from "../../interfaces/user";
+import authReducer from "./authReducer";
 import categoryReducer from "./categoryReducer";
 import shoppingBasketReducer from "./shoppingBasketReducer";
 
@@ -11,6 +13,7 @@ import shoppingBasketReducer from "./shoppingBasketReducer";
 interface rootState {
   basket: Basket;
   categories: Array<Category>;
+  user: User;
 }
 
 /**
@@ -19,6 +22,7 @@ interface rootState {
 const rootReducer = combineReducers<rootState>({
   basket: shoppingBasketReducer,
   categories: categoryReducer,
+  user: authReducer,
 });
 
 export default rootReducer;

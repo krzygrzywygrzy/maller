@@ -1,8 +1,9 @@
-import { Action, ActionCreator } from "redux";
+import { ActionCreator } from "redux";
 import { db } from "../../services/firebase.config";
 import Category from "../../interfaces/categories";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { rootState } from "../reducers/rootReducer";
+import { CategoryAction } from "../reducers/categoryReducer";
 
 /**
  * Redux Thunk action for categories
@@ -10,10 +11,10 @@ import { rootState } from "../reducers/rootReducer";
  * dispatches {categoryReducer} 'LOAD_CATEGORIES' action
  */
 const getCategoryAction: ActionCreator<
-  ThunkAction<Promise<void>, rootState, void, Action>
+  ThunkAction<Promise<void>, rootState, void, CategoryAction>
 > = () => {
   return async (
-    dispatch: ThunkDispatch<rootState, void, Action>
+    dispatch: ThunkDispatch<rootState, void, CategoryAction>
   ): Promise<void> => {
     let categories: Array<Category> = [];
 

@@ -1,9 +1,12 @@
-import { Action, ActionCreator } from "redux";
+import { ActionCreator } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { auth, db } from "../../services/firebase.config";
 import { rootState } from "../reducers/rootReducer";
 import firebase from "firebase";
 import User from "../../interfaces/user";
+import showSnackBar from "../../core/functions/snackBar";
+import { Dispatch } from "react";
+import { AuthAction } from "../reducers/authReducer";
 
 /**
  * Redux Thunk actions for user authorization
@@ -18,9 +21,9 @@ import User from "../../interfaces/user";
  * calls {authenticate()} to dispatch action
  */
 const signUpAction: ActionCreator<
-  ThunkAction<Promise<void>, rootState, void, Action>
+  ThunkAction<Promise<void>, rootState, void, AuthAction>
 > = (password: string, user: User) => {
-  return async (dispatch: ThunkDispatch<rootState, void, Action>) => {
+  return async (dispatch: ThunkDispatch<rootState, void, AuthAction>) => {
     auth
       .createUserWithEmailAndPassword(user.email, password)
       .then((userCredential) => {
@@ -31,8 +34,7 @@ const signUpAction: ActionCreator<
         }
       })
       .catch((err) => {
-        //TODO: handle errors
-        console.log(err);
+        showSnackBar("Cannot create user account!");
       });
   };
 };
@@ -46,25 +48,33 @@ const signUpAction: ActionCreator<
  *  calls {authenticate()} to dispatch action
  */
 const logInAction: ActionCreator<
-  ThunkAction<Promise<void>, rootState, void, Action>
+  ThunkAction<Promise<void>, rootState, void, AuthAction>
 > = (email: string, password: string) => {
-  return async (dispatch: ThunkDispatch<rootState, void, Action>) => {
+  return async (dispatch: ThunkDispatch<rootState, void, AuthAction>) => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredentail) => {
         authenticate(userCredentail, dispatch);
       })
       .catch((err) => {
-        console.log(err);
+        showSnackBar("Cannot log in!");
       });
   };
 };
 
 const authenticate = (
   userCredential: firebase.auth.UserCredential,
-  dispatch: ThunkDispatch<rootState, void, Action>
+  dispatch: ThunkDispatch<rootState, void, AuthAction>
 ) => {
   console.log(userCredential);
 };
 
-export { signUpAction, logInAction };
+const logOutAction: ActionCreator<
+  ThunkAction<void, rootState, void, AuthAction>
+> = () => {
+  return (dispatch: Dispatch<AuthAction>) => {
+    dispatch({ type: "LOG_OUT" });
+  };
+};
+
+export { signUpAction, logInAction, logOutAction };

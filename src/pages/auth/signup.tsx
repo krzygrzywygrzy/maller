@@ -22,6 +22,7 @@ const SignUpPage: React.FC<LogInPageProps> = ({
     signUpAction(password, { name: name, surname: surname, email: email });
   };
 
+  document.title = "maller - sign up";
   return (
     <div className="container">
       <div className="form-container">

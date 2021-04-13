@@ -2,13 +2,13 @@ import Category from "../../interfaces/categories";
 
 const initState: Array<Category> = [];
 
-type Action = { type: "LOAD_CATEGORIES"; payload: Array<Category> };
+type CategoryAction = { type: "LOAD_CATEGORIES"; payload: Array<Category> };
 
 /**
  * categoryReducer
  * manages to return goods categories
  */
-const categoryReducer = (state = initState, action: Action) => {
+const categoryReducer = (state = initState, action: CategoryAction) => {
   switch (action.type) {
     case "LOAD_CATEGORIES":
       state = action.payload;
@@ -17,3 +17,4 @@ const categoryReducer = (state = initState, action: Action) => {
 };
 
 export default categoryReducer;
+export type { CategoryAction };

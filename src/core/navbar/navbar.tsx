@@ -7,11 +7,13 @@ import CategoryList from "./categoryList";
 import { getCategoryAction } from "../../store/actions/categoryActions";
 import Category from "../../interfaces/categories";
 import { rootState } from "../../store/reducers/rootReducer";
-import showSnackBar from "../functions/snackBar";
+import User from "../../interfaces/user";
+import { useLocation } from "wouter";
 
 interface NavbarProps {
   basket: Basket;
   categories: Array<Category>;
+  user: User;
   getCategories: Function;
 }
 
@@ -19,12 +21,12 @@ const Navbar: React.FC<NavbarProps> = ({
   basket,
   categories,
   getCategories,
+  user,
 }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<Boolean>(false);
-  const [showAccount, setShowAccount] = useState<Boolean>(false);
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
-    showSnackBar("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     if (categories.length === 0) getCategories();
   }, []);
 
@@ -34,6 +36,12 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const closeMenu = () => {
     setShowCategory(false);
+  };
+
+  const accountRedirect = () => {
+    if(user.uid !== undefined)
+      setLocation("/profile");
+    else setLocation("/login");
   };
 
   return (
@@ -56,8 +64,9 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
         <div className="navbar-options">
           <div className="navbar-account">
-            <span onClick={()=> setShowAccount(!showAccount)}>Account</span>
-            {showAccount && <div className="account-menu">accountMenu</div>}
+            <span onClick={accountRedirect}>
+              {user.uid !== undefined ? "Account" : "Log in"}
+            </span>
           </div>
           <Link href="/basket" onClick={() => closeMenu()}>
             basket {basket.items.length}
@@ -85,6 +94,7 @@ const mapStateToProps = (state: rootState) => {
   return {
     basket: state.basket,
     categories: state.categories,
+    user: state.user,
   };
 };
 

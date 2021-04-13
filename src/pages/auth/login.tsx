@@ -14,11 +14,15 @@ const LogInPage: React.FC<LogInPageProps> = ({
   const [email, setEmail] = useState<String>("");
   const [password, setPassword] = useState<String>("");
 
+
+
   const handleSubmit = () => {
     //TODO: check if email has proper format
     logInAction(email, password);
   };
 
+
+  document.title = "maller - log in";
   return (
     <div className="container">
       <div className="form-container">
