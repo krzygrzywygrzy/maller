@@ -107,3 +107,11 @@ li:hover,
 .navbar-options > div {
   margin-right: 1rem;
 }
+
+.navbar-account > span {
+  cursor: pointer;
+}
+
+.account-menu {
+  position: absolute;
+}

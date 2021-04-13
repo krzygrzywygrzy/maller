@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "wouter";
+import User from "../../interfaces/user";
 import { signUpAction } from "../../store/actions/authActions";
 import "./auth.css";
 
@@ -13,10 +14,12 @@ const SignUpPage: React.FC<LogInPageProps> = ({
 }: LogInPageProps) => {
   const [email, setEmail] = useState<String>("");
   const [password, setPassword] = useState<String>("");
+  const [name, setName] = useState<String>("");
+  const [surname, setSurname] = useState<String>("");
 
   const handleSubmit = () => {
-    //TODO: check if email has proper format
-    signUpAction(email, password);
+    //TODO: check if data is correct
+    signUpAction(password, { name: name, surname: surname, email: email });
   };
 
   return (
@@ -24,6 +27,24 @@ const SignUpPage: React.FC<LogInPageProps> = ({
       <div className="form-container">
         <div className="form-title">
           <span>Sign Up</span>
+        </div>
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="name"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+        </div>
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="surname"
+            onChange={(e) => {
+              setSurname(e.target.value);
+            }}
+          />
         </div>
         <div className="input-container">
           <input
@@ -52,8 +73,8 @@ const SignUpPage: React.FC<LogInPageProps> = ({
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    signUpAction: (email: string, password: string) =>
-      dispatch(signUpAction(email, password)),
+    signUpAction: (password: string, user: User) =>
+      dispatch(signUpAction(password, user)),
   };
 };
 

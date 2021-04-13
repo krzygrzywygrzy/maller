@@ -7,6 +7,7 @@ import CategoryList from "./categoryList";
 import { getCategoryAction } from "../../store/actions/categoryActions";
 import Category from "../../interfaces/categories";
 import { rootState } from "../../store/reducers/rootReducer";
+import showSnackBar from "../functions/snackBar";
 
 interface NavbarProps {
   basket: Basket;
@@ -20,8 +21,10 @@ const Navbar: React.FC<NavbarProps> = ({
   getCategories,
 }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<Boolean>(false);
+  const [showAccount, setShowAccount] = useState<Boolean>(false);
 
   useEffect(() => {
+    showSnackBar("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     if (categories.length === 0) getCategories();
   }, []);
 
@@ -52,7 +55,10 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
         <div className="navbar-options">
-          <div>Account</div>
+          <div className="navbar-account">
+            <span onClick={()=> setShowAccount(!showAccount)}>Account</span>
+            {showAccount && <div className="account-menu">accountMenu</div>}
+          </div>
           <Link href="/basket" onClick={() => closeMenu()}>
             basket {basket.items.length}
           </Link>

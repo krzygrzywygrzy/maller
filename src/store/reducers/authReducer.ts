@@ -1,6 +1,12 @@
-const initState = {};
+import User from "../../interfaces/user";
 
-const authReducer = (state: Object, action: Object) => {
+const initState: User = {
+  name: "",
+  surname: "",
+  email: "",
+};
+
+const authReducer = (state: User = initState, action: Object) => {
   return state;
 };
 

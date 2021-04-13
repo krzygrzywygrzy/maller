@@ -3,6 +3,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { auth, db } from "../../services/firebase.config";
 import { rootState } from "../reducers/rootReducer";
 import firebase from "firebase";
+import User from "../../interfaces/user";
 
 /**
  * Redux Thunk actions for user authorization
@@ -18,13 +19,16 @@ import firebase from "firebase";
  */
 const signUpAction: ActionCreator<
   ThunkAction<Promise<void>, rootState, void, Action>
-> = (email: string, password: string) => {
+> = (password: string, user: User) => {
   return async (dispatch: ThunkDispatch<rootState, void, Action>) => {
     auth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(user.email, password)
       .then((userCredential) => {
-        //TODO: create entry in users collection
-        authenticate(userCredential, dispatch);
+        if (userCredential.user?.uid !== undefined) {
+          user.uid = userCredential.user.uid;
+          db.collection("users").doc(userCredential.user.uid).set(user);
+          authenticate(userCredential, dispatch);
+        }
       })
       .catch((err) => {
         //TODO: handle errors
@@ -41,7 +45,6 @@ const signUpAction: ActionCreator<
  *
  *  calls {authenticate()} to dispatch action
  */
-
 const logInAction: ActionCreator<
   ThunkAction<Promise<void>, rootState, void, Action>
 > = (email: string, password: string) => {
