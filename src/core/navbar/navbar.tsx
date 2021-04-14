@@ -24,11 +24,13 @@ const Navbar: React.FC<NavbarProps> = ({
   user,
 }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<Boolean>(false);
-  const [location, setLocation] = useLocation();
+  
+  // eslint-disable-next-line
+  const [_, setLocation] = useLocation();
 
   useEffect(() => {
     if (categories.length === 0) getCategories();
-  }, []);
+  }, [categories, getCategories]);
 
   const handleChange = (phrase: String) => {
     //TODO: search in db
@@ -39,8 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   const accountRedirect = () => {
-    if(user.uid !== undefined)
-      setLocation("/profile");
+    if (user.uid !== undefined) setLocation("/profile");
     else setLocation("/login");
   };
 

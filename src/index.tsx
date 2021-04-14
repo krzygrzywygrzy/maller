@@ -15,6 +15,7 @@ import Footer from "./core/footer/footer";
 import Navbar from "./core/navbar/navbar";
 import SignUpPage from "./pages/auth/signup";
 import LogInPage from "./pages/auth/login";
+import ProfilePage from "./pages/profile/profile";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -40,6 +41,9 @@ ReactDOM.render(
           </Route>
           <Route path="/login">
             <LogInPage />
+          </Route>
+          <Route path="/profile">
+            <ProfilePage />
           </Route>
         </div>
         <Footer />

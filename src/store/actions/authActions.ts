@@ -5,7 +5,7 @@ import { rootState } from "../reducers/rootReducer";
 import firebase from "firebase";
 import User from "../../interfaces/user";
 import showSnackBar from "../../core/functions/snackBar";
-import { Dispatch } from "react";
+import { Dispatch } from "redux";
 import { AuthAction } from "../reducers/authReducer";
 
 /**
@@ -34,7 +34,7 @@ const signUpAction: ActionCreator<
           authenticate(userCredential.user, dispatch, redirect);
         }
       })
-      .catch((err) => {
+      .catch((_) => {
         showSnackBar("Cannot create user account!");
       });
   };
@@ -59,7 +59,7 @@ const logInAction: ActionCreator<
         if (userCredential.user !== null)
           authenticate(userCredential.user, dispatch, redirect);
       })
-      .catch((err) => {
+      .catch((_) => {
         showSnackBar("Cannot log in!");
       });
   };

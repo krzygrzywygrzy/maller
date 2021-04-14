@@ -7,7 +7,7 @@ const showSnackBar = (message: String) => {
   `;
 
   const closeSnackBar = (e) => {
-    if (e.target.id == "snack-close") {
+    if (e.target.id === "snack-close") {
       document.body.removeChild(snackBar);
       document.removeEventListener<"click">("click", closeSnackBar);
     }

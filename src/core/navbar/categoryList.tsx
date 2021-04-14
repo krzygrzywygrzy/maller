@@ -13,14 +13,9 @@ const CategoryList: React.FC<CategoryListProps> = ({
   categories,
   close,
 }: CategoryListProps) => {
-  //TODO: resolve Type 'Number' cannot be used as an index type.
   const [subcat, setSub] = useState<any | null>(null);
 
-  //props
-  //const categories: Array<Category> = props.categories;
-
   useEffect(() => {
-    //TODO: resolve missing dependency 'categories.main' warning
 
     const displaySubmenu = (e) => {
       if (e.target.tagName === "LI" && e.target.id === "main-cat") {
@@ -38,7 +33,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
     return () => {
       document.removeEventListener("mouseover", displaySubmenu);
     };
-  }, []);
+  }, [subcat, categories]);
 
   return (
     <div className="category-list" id="category-list">
