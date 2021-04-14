@@ -6,6 +6,9 @@ import authReducer from "./authReducer";
 import categoryReducer from "./categoryReducer";
 import shoppingBasketReducer from "./shoppingBasketReducer";
 
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
 /**
  * rootState interface
  * defines what kind of data rootReducer returns
@@ -25,5 +28,11 @@ const rootReducer = combineReducers<rootState>({
   user: authReducer,
 });
 
-export default rootReducer;
+const persistConfig = {
+  key: "user",
+  storage,
+  whitelist: ["user"],
+};
+
+export default persistReducer(persistConfig, rootReducer);
 export type { rootState };

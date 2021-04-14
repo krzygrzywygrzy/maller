@@ -17,11 +17,17 @@ import SignUpPage from "./pages/auth/signup";
 import LogInPage from "./pages/auth/login";
 import ProfilePage from "./pages/profile/profile";
 
+import { persistStore } from "redux-persist";
+import { PersistGate } from 'redux-persist/integration/react';
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
+const persistor = persistStore(store);
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <PersistGate persistor={persistor}>
       <div className="page">
         <div className="content-wrapper">
           <Navbar />
@@ -48,6 +54,7 @@ ReactDOM.render(
         </div>
         <Footer />
       </div>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
