@@ -1,10 +1,13 @@
-import Results from "../../interfaces/results";
+import ResultsFilter from "../../interfaces/results";
 
-const initState: Results = {};
+const initState: ResultsFilter = {};
 
-type ResultsFilterAction = { type: "SET_RESULTS"; payload: Results };
+type ResultsFilterAction = { type: "SET_RESULTS"; payload: ResultsFilter };
 
-const resultsReducer = (state = initState, action: ResultsFilterAction) => {
+const resultsFilterReducer = (
+  state = initState,
+  action: ResultsFilterAction
+) => {
   switch (action.type) {
     case "SET_RESULTS":
       state = action.payload;
@@ -13,5 +16,5 @@ const resultsReducer = (state = initState, action: ResultsFilterAction) => {
   return state;
 };
 
-export default resultsReducer;
+export default resultsFilterReducer;
 export type { ResultsFilterAction };

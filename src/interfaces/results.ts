@@ -1,4 +1,4 @@
-export default interface Results {
+export default interface ResultsFilter {
   category?: String;
   subcategory?: String;
   phrase?: String;

@@ -8,8 +8,11 @@ import shoppingBasketReducer from "./shoppingBasketReducer";
 
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+
+import Product from "../../interfaces/product";
+import resultsFilterReducer from "./resultsFilterReducer";
 import ResultsFilter from "../../interfaces/results";
-import resultsReducer from "./resultsFilterReducer";
+import resultsReducer from "./resultsReducer";
 
 /**
  * rootState interface
@@ -19,7 +22,8 @@ interface rootState {
   basket: Basket;
   categories: Array<Category>;
   user: User;
-  results: ResultsFilter;
+  resultsFilters: ResultsFilter;
+  results: Array<Product>;
 }
 
 /**
@@ -29,6 +33,7 @@ const rootReducer = combineReducers<rootState>({
   basket: shoppingBasketReducer,
   categories: categoryReducer,
   user: authReducer,
+  resultsFilters: resultsFilterReducer,
   results: resultsReducer,
 });
 
