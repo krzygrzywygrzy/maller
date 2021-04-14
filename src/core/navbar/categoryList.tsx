@@ -3,20 +3,24 @@ import { connect } from "react-redux";
 import Category from "../../interfaces/categories";
 import { Link } from "wouter";
 import { rootState } from "../../store/reducers/rootReducer";
+import ResultsFilter from "../../interfaces/results";
+import { setResultsAction } from "../../store/actions/resultsFilterActions";
+
 
 interface CategoryListProps {
   categories: Array<Category>;
   close: Function;
+  setResultsAction: Function;
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({
   categories,
   close,
+  setResultsAction,
 }: CategoryListProps) => {
   const [subcat, setSub] = useState<any | null>(null);
 
   useEffect(() => {
-
     const displaySubmenu = (e) => {
       if (e.target.tagName === "LI" && e.target.id === "main-cat") {
         let index: Number = subcat;
@@ -36,15 +40,18 @@ const CategoryList: React.FC<CategoryListProps> = ({
   }, [subcat, categories]);
 
   return (
-    <div className="category-list" id="category-list">
+    <div className="category-list unselectable" id="category-list">
       <div className="cl-section border-right">
         <ul>
           {categories.map((el, index) => {
             return (
               <Link
                 key={index}
-                href={`/results/${el.main}/none`}
-                onClick={() => close()}
+                href={`/results`}
+                onClick={() => {
+                  setResultsAction({ category: categories[index].main });
+                  close();
+                }}
               >
                 <li id="main-cat">{el.main}</li>
               </Link>
@@ -62,8 +69,14 @@ const CategoryList: React.FC<CategoryListProps> = ({
                 return (
                   <Link
                     key={index}
-                    href={`/results/${categories[subcat].main}/${el}`}
-                    onClick={() => close()}
+                    href={`/results`}
+                    onClick={() => {
+                      setResultsAction({
+                        category: categories[subcat].main,
+                        subcategory: categories[subcat].sub[index],
+                      });
+                      close();
+                    }}
                   >
                     <li>{el}</li>
                   </Link>
@@ -83,4 +96,10 @@ const mapStateToProps = (state: rootState) => {
   };
 };
 
-export default connect(mapStateToProps)(CategoryList);
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    setResultsAction: (results: ResultsFilter) => dispatch(setResultsAction(results)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);

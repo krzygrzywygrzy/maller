@@ -18,42 +18,39 @@ import LogInPage from "./pages/auth/login";
 import ProfilePage from "./pages/profile/profile";
 
 import { persistStore } from "redux-persist";
-import { PersistGate } from 'redux-persist/integration/react';
+import { PersistGate } from "redux-persist/integration/react";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const persistor = persistStore(store);
-
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-      <div className="page">
-        <div className="content-wrapper">
-          <Navbar />
-          <Route path="/">
-            <Home />
-          </Route>
-          <Route path="/basket">
-            <BasketPage />
-          </Route>
-          <Route path="/results/:main/:sub">
-            {(params) => {
-              return <ResultsPage main={params.main} sub={params.sub} />;
-            }}
-          </Route>
-          <Route path="/signup">
-            <SignUpPage />
-          </Route>
-          <Route path="/login">
-            <LogInPage />
-          </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
+        <div className="page">
+          <div className="content-wrapper">
+            <Navbar />
+            <Route path="/">
+              <Home />
+            </Route>
+            <Route path="/basket">
+              <BasketPage />
+            </Route>
+            <Route path="/results">
+              <ResultsPage />
+            </Route>
+            <Route path="/signup">
+              <SignUpPage />
+            </Route>
+            <Route path="/login">
+              <LogInPage />
+            </Route>
+            <Route path="/profile">
+              <ProfilePage />
+            </Route>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

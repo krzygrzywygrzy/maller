@@ -24,10 +24,9 @@ const Navbar: React.FC<NavbarProps> = ({
   user,
 }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<Boolean>(false);
-  
+
   // eslint-disable-next-line
   const [_, setLocation] = useLocation();
-
 
   //TODO: fix bug {Maximum update depth exceeded} after specifying useEffect dependencies
   useEffect(() => {
@@ -48,9 +47,9 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <div className="navbar">
+    <div className="navbar unselectable">
       <div className="navbar-container">
-        <div className="navbar-title">
+        <div className="navbar-title ">
           <Link href="/">maller</Link>
         </div>
         <div>
@@ -60,13 +59,13 @@ const Navbar: React.FC<NavbarProps> = ({
               onChange={(e) => handleChange(e.target.value)}
               placeholder="toys, health, sports..."
             />
-            <div className="search_btn">
+            <div className="search_btn ">
               <span>search</span>
             </div>
           </div>
         </div>
-        <div className="navbar-options">
-          <div className="navbar-account">
+        <div className="navbar-options ">
+          <div className="navbar-account ">
             <span onClick={accountRedirect}>
               {user.uid !== undefined ? "Account" : "Log in"}
             </span>
@@ -78,7 +77,7 @@ const Navbar: React.FC<NavbarProps> = ({
       </div>
       <div className="category-container">
         <div
-          className="categories"
+          className="categories "
           onClick={() => {
             setShowCategory(!showCategory);
           }}

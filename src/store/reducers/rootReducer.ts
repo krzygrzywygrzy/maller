@@ -8,6 +8,8 @@ import shoppingBasketReducer from "./shoppingBasketReducer";
 
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import ResultsFilter from "../../interfaces/results";
+import resultsReducer from "./resultsFilterReducer";
 
 /**
  * rootState interface
@@ -17,6 +19,7 @@ interface rootState {
   basket: Basket;
   categories: Array<Category>;
   user: User;
+  results: ResultsFilter;
 }
 
 /**
@@ -26,6 +29,7 @@ const rootReducer = combineReducers<rootState>({
   basket: shoppingBasketReducer,
   categories: categoryReducer,
   user: authReducer,
+  results: resultsReducer,
 });
 
 const persistConfig = {

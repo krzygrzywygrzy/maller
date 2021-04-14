@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import User from "../../interfaces/user";
 import { rootState } from "../../store/reducers/rootReducer";
 import { useLocation } from "wouter";
+import "./profile.css";
 
 interface ProfilePageProps {
   user: User;
@@ -15,17 +16,45 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   const [_, setLocation] = useLocation();
 
   useEffect(() => {
-    console.log("works");
     if (user.uid === undefined) {
       setLocation("/login");
     }
   }, [user, setLocation]);
 
-  return <div>
+  const addPaymentMethod = () => {
+    console.log("payment!");
+  };
+
+  return (
+    <div>
       <div className="container">
-          d
+        <div className="profile">
+          <div>
+            <div className="profile-orders">
+              No orders yet!
+            </div>
+            <div className="profile-address"></div>
+          </div>
+          <div>
+            <div className="profile-info">
+              <div className="info-name">
+                <span>
+                  {user.name} {user.surname}
+                </span>
+              </div>
+              <div className="info-email">
+                <span>email: {user.email}</span>
+              </div>
+              <div className="payment-options">
+                <span>No payment options yet!</span>
+                <button onClick={addPaymentMethod}>add</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-  </div>;
+    </div>
+  );
 };
 
 const mapStateToProps = (state: rootState) => {
@@ -33,7 +62,5 @@ const mapStateToProps = (state: rootState) => {
     user: state.user,
   };
 };
-
-
 
 export default connect(mapStateToProps)(ProfilePage);

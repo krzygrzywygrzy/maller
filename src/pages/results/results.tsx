@@ -1,19 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
+import Results from "../../interfaces/results";
+import { rootState } from "../../store/reducers/rootReducer";
 
 interface ResultsPageProps {
-  main?: String;
-  sub?: String;
+  results: Results;
 }
 
 const ResultsPage: React.FC<ResultsPageProps> = ({
-  main,
-  sub,
+  results,
 }: ResultsPageProps) => {
-  return (
-    <div>
-      {main} {sub}
-    </div>
-  );
+  console.log(results);
+
+  return <div>results</div>;
 };
 
-export default ResultsPage;
+const mapStateToProps = (state: rootState) => {
+  return {
+    results: state.results,
+  };
+};
+
+export default connect(mapStateToProps)(ResultsPage);
