@@ -3,8 +3,8 @@ import { ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 import SearchBy from "../../interfaces/searchBy";
 
-import { SearchByAction } from "../reducers/resultsByReducer";
 import { rootState } from "../reducers/rootReducer";
+import { SearchByAction } from "../reducers/searchByReducer";
 
 /**
  * @param searchBy -> might be {SearchByCategory | SearchBySubcategory | SearchByPhrase } @class

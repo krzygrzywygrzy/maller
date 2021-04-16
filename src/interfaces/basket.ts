@@ -1,7 +1,7 @@
 import Product from "./product";
 
 interface Basket {
-    items: Array<Product>
+  items: Array<Product>;
 }
 
 export default Basket;
