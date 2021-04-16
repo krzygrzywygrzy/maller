@@ -3,20 +3,22 @@ import { connect } from "react-redux";
 import Category from "../../interfaces/categories";
 import { Link } from "wouter";
 import { rootState } from "../../store/reducers/rootReducer";
-import ResultsFilter from "../../interfaces/results";
-import { setResultsAction } from "../../store/actions/resultsFilterActions";
-
+import SearchBy, {
+  SearchByCategory,
+  SearchBySubcategory,
+} from "../../interfaces/searchBy";
+import { setSearchByAction } from "../../store/actions/searchByActions";
 
 interface CategoryListProps {
   categories: Array<Category>;
   close: Function;
-  setResultsAction: Function;
+  setSearchByAction(searchBy: SearchBy): Function;
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({
   categories,
   close,
-  setResultsAction,
+  setSearchByAction,
 }: CategoryListProps) => {
   const [subcat, setSub] = useState<any | null>(null);
 
@@ -49,7 +51,9 @@ const CategoryList: React.FC<CategoryListProps> = ({
                 key={index}
                 href={`/results`}
                 onClick={() => {
-                  setResultsAction({ category: categories[index].main });
+                  setSearchByAction(
+                    new SearchByCategory(categories[index].main)
+                  );
                   close();
                 }}
               >
@@ -71,10 +75,12 @@ const CategoryList: React.FC<CategoryListProps> = ({
                     key={index}
                     href={`/results`}
                     onClick={() => {
-                      setResultsAction({
-                        category: categories[subcat].main,
-                        subcategory: categories[subcat].sub[index],
-                      });
+                      setSearchByAction(
+                        new SearchBySubcategory(
+                          categories[subcat].main,
+                          categories[subcat].sub[index]
+                        )
+                      );
                       close();
                     }}
                   >
@@ -98,7 +104,8 @@ const mapStateToProps = (state: rootState) => {
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    setResultsAction: (results: ResultsFilter) => dispatch(setResultsAction(results)),
+    setSearchByAction: (searchBy: SearchBy) =>
+      dispatch(setSearchByAction(searchBy)),
   };
 };
 

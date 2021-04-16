@@ -10,9 +10,9 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import Product from "../../interfaces/product";
-import resultsFilterReducer from "./resultsFilterReducer";
-import ResultsFilter from "../../interfaces/results";
 import resultsReducer from "./resultsReducer";
+import searchByReducer from "./resultsByReducer";
+import SearchBy from "../../interfaces/searchBy";
 
 /**
  * rootState interface
@@ -22,7 +22,7 @@ interface rootState {
   basket: Basket;
   categories: Array<Category>;
   user: User;
-  resultsFilters: ResultsFilter;
+  searchBy: SearchBy;
   results: Array<Product>;
 }
 
@@ -33,7 +33,7 @@ const rootReducer = combineReducers<rootState>({
   basket: shoppingBasketReducer,
   categories: categoryReducer,
   user: authReducer,
-  resultsFilters: resultsFilterReducer,
+  searchBy: searchByReducer,
   results: resultsReducer,
 });
 

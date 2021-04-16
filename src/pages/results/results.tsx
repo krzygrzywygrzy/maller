@@ -2,21 +2,23 @@ import React from "react";
 import { connect } from "react-redux";
 import ProductCard from "../../core/productCard/productCard";
 import Product from "../../interfaces/product";
-import ResultsFilter from "../../interfaces/results";
 import "./results.css";
 
 import { rootState } from "../../store/reducers/rootReducer";
+import SearchBy from "../../interfaces/searchBy";
 
 interface ResultsPageProps {
-  resultsFilters: ResultsFilter;
+  searchBy: SearchBy;
   results: Array<Product>;
 }
 
 const ResultsPage: React.FC<ResultsPageProps> = ({
-  resultsFilters,
+  searchBy,
   results,
 }: ResultsPageProps) => {
   document.title = "results";
+
+  console.log(searchBy);
 
   return (
     <div>
@@ -33,7 +35,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
 
 const mapStateToProps = (state: rootState) => {
   return {
-    resultsFilters: state.resultsFilters,
+    searchBy: state.searchBy,
     results: state.results,
   };
 };

@@ -19,6 +19,12 @@ const initState: Array<Product> = [
     price: 40,
     inStock: 100,
   },
+  {
+    name: "Sempiternal",
+    description: "DAMN GOOD METALCORE LP",
+    price: 40,
+    inStock: 100,
+  },
 ];
 
 type ResultsAction = { type: "LOAD_PRODUCTS"; payload: Array<Product> };

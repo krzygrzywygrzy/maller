@@ -1,5 +1,4 @@
 export default interface Category {
-    main: String,
-    sub: Array<String>,
+  main: string;
+  sub: Array<string>;
 }
-
