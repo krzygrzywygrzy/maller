@@ -1,9 +1,8 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import ProductCard from "../../core/productCard/productCard";
 import Product from "../../interfaces/product";
 import "./results.css";
-
 import { rootState } from "../../store/reducers/rootReducer";
 import SearchBy from "../../interfaces/searchBy";
 import { getResultsAction } from "../../store/actions/resultsActions";
@@ -12,7 +11,7 @@ import useSearchResults from "../../services/useSearchResults";
 interface ResultsPageProps {
   searchBy: SearchBy;
   results: Array<Product>;
-  getResultsAction: Function;
+  getResultsAction(searchBy: SearchBy);
 }
 
 const ResultsPage: React.FC<ResultsPageProps> = ({
@@ -21,8 +20,8 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
   getResultsAction,
 }: ResultsPageProps) => {
   document.title = "results";
-  useSearchResults(getResultsAction, searchBy);
-
+  const success = useSearchResults(getResultsAction, searchBy);
+  
   return (
     <div>
       <div className="container">
@@ -33,7 +32,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
             })
           ) : (
             <div>
-              <span>loading...</span>
+              <span>{success === undefined && "loading..."}</span>
             </div>
           )}
         </div>
@@ -51,8 +50,8 @@ const mapStateToProps = (state: rootState) => {
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    getResultsAction: () => {
-      dispatch(getResultsAction());
+    getResultsAction: (searchBy: SearchBy) => {
+      dispatch(getResultsAction(searchBy));
     },
   };
 };

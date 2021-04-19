@@ -6,17 +6,17 @@ import { signUpAction } from "../../store/actions/authActions";
 import "./auth.css";
 
 interface LogInPageProps {
-  signUpAction: Function;
+  signUpAction(password: string, user: User, redirect: any);
 }
 
 const SignUpPage: React.FC<LogInPageProps> = ({
   signUpAction,
 }: LogInPageProps) => {
-  const [email, setEmail] = useState<String>("");
-  const [password, setPassword] = useState<String>("");
-  const [name, setName] = useState<String>("");
-  const [surname, setSurname] = useState<String>("");
-  
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [surname, setSurname] = useState<string>("");
+
   // eslint-disable-next-line
   const [_, setLocation] = useLocation();
 

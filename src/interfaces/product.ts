@@ -3,8 +3,8 @@
 interface Product {
   name: string;
   description?: string;
-  price: Number;
-  inStock: Number;
+  price: number;
+  inStock: number;
   image?: string; // base64 string image
 }
 

@@ -14,7 +14,7 @@ interface NavbarProps {
   basket: Basket;
   categories: Array<Category>;
   user: User;
-  getCategories: Function;
+  getCategories();
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({
   getCategories,
   user,
 }: NavbarProps) => {
-  const [showCategory, setShowCategory] = useState<Boolean>(false);
+  const [showCategory, setShowCategory] = useState<boolean>(false);
 
   // eslint-disable-next-line
   const [_, setLocation] = useLocation();
@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({
     if (categories.length === 0) getCategories();
   }, []);
 
-  const handleChange = (phrase: String) => {
+  const handleChange = (phrase: string) => {
     //TODO: search in db
   };
 
