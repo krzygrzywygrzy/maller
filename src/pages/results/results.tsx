@@ -21,20 +21,14 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
 }: ResultsPageProps) => {
   document.title = "results";
   const success = useSearchResults(getResultsAction, searchBy);
-  
+
   return (
     <div>
       <div className="container">
         <div className="product-grid">
-          {results.length > 0 ? (
-            results.map((item, index) => {
-              return <ProductCard product={item} key={index} />;
-            })
-          ) : (
-            <div>
-              <span>{success === undefined && "loading..."}</span>
-            </div>
-          )}
+          {results.map((item, index) => {
+            return <ProductCard product={item} key={index} />;
+          })}
         </div>
       </div>
     </div>

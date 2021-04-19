@@ -1,31 +1,6 @@
 import Product from "../../interfaces/product";
 
-const initState: Array<Product> = [
-  {
-    name: "Sempiternal",
-    description: "DAMN GOOD METALCORE LP",
-    price: 40,
-    inStock: 100,
-  },
-  {
-    name: "Sempiternal",
-    description: "DAMN GOOD METALCORE LP",
-    price: 40,
-    inStock: 100,
-  },
-  {
-    name: "Sempiternal",
-    description: "DAMN GOOD METALCORE LP",
-    price: 40,
-    inStock: 100,
-  },
-  {
-    name: "Sempiternal",
-    description: "DAMN GOOD METALCORE LP",
-    price: 40,
-    inStock: 100,
-  },
-];
+const initState: Array<Product> = [];
 
 type ResultsAction = { type: "LOAD_PRODUCTS"; payload: Array<Product> };
 

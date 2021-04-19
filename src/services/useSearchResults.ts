@@ -11,7 +11,7 @@ const useSearchResults = (getResults: Function, searchBy: SearchBy) => {
   const [success, setSuccess] = useState<boolean>();
   useEffect(() => {
     getResults(searchBy);
-  }, [searchBy, getResults]);
+  }, []);
   return success;
 };
 
