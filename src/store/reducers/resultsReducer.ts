@@ -8,9 +8,10 @@ const resultsReducer = (state = initState, action: ResultsAction) => {
   switch (action.type) {
     case "LOAD_PRODUCTS":
       state = action.payload;
-      break;
+      return state;
+    default:
+      return state;
   }
-  return state;
 };
 
 export default resultsReducer;

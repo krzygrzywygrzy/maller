@@ -22,7 +22,6 @@ interface rootState {
   categories: Array<Category>;
   user: User;
   searchBy: SearchBy;
-  results: Array<Product>;
 }
 
 /**
@@ -33,7 +32,6 @@ const rootReducer = combineReducers<rootState>({
   categories: categoryReducer,
   user: authReducer,
   searchBy: searchByReducer,
-  results: resultsReducer,
 });
 
 const persistConfig = {
