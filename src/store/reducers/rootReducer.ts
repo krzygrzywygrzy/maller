@@ -8,8 +8,6 @@ import shoppingBasketReducer from "./shoppingBasketReducer";
 
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import Product from "../../interfaces/product";
-import resultsReducer from "./resultsReducer";
 import SearchBy from "../../interfaces/searchBy";
 import searchByReducer from "./searchByReducer";
 

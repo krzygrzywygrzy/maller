@@ -1,26 +1,10 @@
-import showSnackBar from "../core/functions/snackBar";
 import Product from "../interfaces/product";
-import SearchBy, {
+import {
   SearchByCategory,
   SearchByPhrase,
   SearchBySubcategory,
 } from "../interfaces/searchBy";
 import { db } from "./firebase.config";
-
-const fetchResults = async (searchBy: SearchBy): Promise<Array<Product>> => {
-  let results: Array<Product> = [];
-  if (searchBy instanceof SearchByCategory) {
-    results = await getByCateogry(searchBy as SearchByCategory);
-  } else if (searchBy instanceof SearchBySubcategory)
-    getBySubcategory(searchBy as SearchBySubcategory);
-  else if (searchBy instanceof SearchByPhrase)
-    getByPhrase(searchBy as SearchByPhrase);
-  else {
-    showSnackBar("Wrong search arguments!");
-  }
-
-  return results;
-};
 
 const getByCateogry = async (
   payload: SearchByCategory
@@ -49,11 +33,23 @@ const getByCateogry = async (
 };
 
 const getBySubcategory = async (payload: SearchBySubcategory) => {
-  console.log(payload.subcategory);
+  let list: Array<Product> = [];
+  const res = await db
+    .collection(payload.category)
+    .doc(payload.subcategory)
+    .collection(payload.subcategory)
+    .get();
+
+  res.docs.forEach((finalDoc) => {
+    const el = finalDoc.data();
+    list.push({ name: el.name, price: el.price, inStock: el.inStock });
+  });
+
+  return list;
 };
 
 const getByPhrase = async (payload: SearchByPhrase) => {
   console.log(payload.phrase);
 };
 
-export default fetchResults;
+export { getByCateogry, getBySubcategory, getByPhrase };

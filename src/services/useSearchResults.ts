@@ -1,25 +1,48 @@
 import { useEffect, useState } from "react";
-import SearchBy from "../interfaces/searchBy";
-import fetchResults from "./resultsService";
+import Product from "../interfaces/product";
+import SearchBy, {
+  SearchByCategory,
+  SearchBySubcategory,
+} from "../interfaces/searchBy";
+import { getByCateogry, getBySubcategory } from "./resultsService";
 
 /**
  * custom hook to get search results from firestore
  * @param getResults -> funtion that must return dispatch(getResultsAction)
  * @param searchBy -> must be {SearchByCategory | SearchBySubcategory | SearchByPhrase } @class
- * @returns {success: boolean} -> false = "error"; true = "success"
+ * @returns {ResultsList}
  */
 
-//TODO: resolve bug with dissapearing results
-const useSearchResults = (searchBy: SearchBy) => {
-  //const [success, setSuccess] = useState<boolean>();
+class ResultsList {
+  constructor(s: string, i: Array<Product>) {
+    this.state = s;
+    this.items = i;
+  }
+  state: string;
+  items: Array<Product>;
+}
+
+const useSearchResults = (searchBy: SearchBy): ResultsList => {
+  const [status, setStatus] = useState<string>("idle");
+  const [items, setItems] = useState<Array<Product>>([]);
+
   useEffect(() => {
     const get = async () => {
-      const res = await fetchResults(searchBy);
-      console.log(res);
+      setStatus("pending");
+      if (searchBy instanceof SearchByCategory) {
+        setItems(await getByCateogry(searchBy));
+        setStatus("success");
+      } else if (searchBy instanceof SearchBySubcategory) {
+        setItems(await getBySubcategory(searchBy));
+        setStatus("success");
+      }
     };
+
     get();
-  }, []);
-  // return success;
+  }, [searchBy]);
+  console.log(items);
+  return new ResultsList(status, items);
 };
 
 export default useSearchResults;
+export { ResultsList };
