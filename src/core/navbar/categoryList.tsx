@@ -56,7 +56,9 @@ const CategoryList: React.FC<CategoryListProps> = ({
               // >
               //   <li id="main-cat">{el.main}</li>
               // </Link>
-              <li id="main-cat">{el.main}</li>
+              <li id="main-cat" key={index}>
+                {el.main}
+              </li>
             );
           })}
         </ul>

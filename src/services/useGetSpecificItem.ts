@@ -6,6 +6,7 @@ import SearchBy, {
   SearchByPhrase,
   SearchBySubcategory,
 } from "../interfaces/searchBy";
+import { db } from "./firebase.config";
 
 /**
  * custom hook to get
@@ -40,16 +41,40 @@ const useGetSpecificItem = (id: string, searchBy: SearchBy) => {
     };
 
     get();
-  }, []);
+  }, [id, searchBy]);
   return { status, item };
 };
 
-//TODO: finish implementation
+/**
+ *
+ * @param payload {SearchBySubcategory} -> decides where to search for the document
+ * @param id -> document id of the item
+ * @returns {Product} or {DbError} when error accured
+ */
 const getInSubCategory = async (
   payload: SearchBySubcategory,
   id: string
 ): Promise<Product | DbError> => {
-  return new DbError("Cannot get data! Check your internet connection!");
+  const query = await db
+    .collection(payload.category)
+    .doc(payload.subcategory)
+    .collection(payload.subcategory)
+    .doc(id)
+    .get();
+
+  //TODO: update the products in db to have more fields
+  const data = query.data();
+  if (data !== undefined) {
+    return {
+      name: data.name,
+      price: data.price,
+      inStock: data.inStock,
+      description: data.description,
+      rating: data.rating,
+    };
+  } else {
+    return new DbError("Cannot get data! Check your internet connection!");
+  }
 };
 
 const getInPhrase = async (): Promise<Product | DbError> => {

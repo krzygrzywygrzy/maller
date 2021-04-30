@@ -8,12 +8,17 @@ const showSnackBar = (message: String) => {
 
   const closeSnackBar = (e) => {
     if (e.target.id === "snack-close") {
-      document.body.removeChild(snackBar);
-      document.removeEventListener<"click">("click", closeSnackBar);
+      clear();
     }
   };
 
-  document.addEventListener<"click">("click", closeSnackBar);
+  const clear = () => {
+    document.body.removeChild(snackBar);
+    document.removeEventListener<"click">("click", closeSnackBar);
+  };
+
+  //document.addEventListener<"click">("click", closeSnackBar);
+  setTimeout(clear, 5000);
   document.body.appendChild(snackBar);
 };
 
