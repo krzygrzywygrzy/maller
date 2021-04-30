@@ -26,7 +26,7 @@ const getByCateogry = async (
 
     res.docs.forEach((finalDoc) => {
       const el = finalDoc.data();
-      list.push({ name: el.name, price: el.price, inStock: el.inStock });
+      list.push({ name: el.name, price: el.price });
     });
   });
   return list;
@@ -42,7 +42,7 @@ const getBySubcategory = async (payload: SearchBySubcategory) => {
 
   res.docs.forEach((finalDoc) => {
     const el = finalDoc.data();
-    list.push({ name: el.name, price: el.price, inStock: el.inStock });
+    list.push({ name: el.name, price: el.price, docId: finalDoc.id });
   });
 
   return list;
