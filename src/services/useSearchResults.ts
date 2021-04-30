@@ -40,7 +40,6 @@ const useSearchResults = (searchBy: SearchBy): ResultsList => {
 
     get();
   }, [searchBy]);
-  console.log(items);
   return new ResultsList(status, items);
 };
 

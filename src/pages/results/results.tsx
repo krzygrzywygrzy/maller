@@ -23,8 +23,14 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
   return (
     <div>
       <div className="container">
-        <div>{results.state}</div>
-        <div className="product-grid"></div>
+        <div className="product-grid">
+          {results.items.map((item, index) => {
+            return <ProductCard product={item} key={index} />;
+          })}
+        </div>
+      </div>
+      <div className="results-side-menu">
+        <span>Filters</span>
       </div>
     </div>
   );
@@ -37,5 +43,3 @@ const mapStateToProps = (state: rootState) => {
 };
 
 export default connect(mapStateToProps)(ResultsPage);
-
-//return <ProductCard product={item} key={index} />;

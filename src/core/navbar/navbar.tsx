@@ -28,10 +28,9 @@ const Navbar: React.FC<NavbarProps> = ({
   // eslint-disable-next-line
   const [_, setLocation] = useLocation();
 
-  //TODO: fix bug {Maximum update depth exceeded} after specifying useEffect dependencies
   useEffect(() => {
     if (categories.length === 0) getCategories();
-  }, []);
+  }, [categories.length, getCategories]);
 
   const handleChange = (phrase: string) => {
     //TODO: search in db

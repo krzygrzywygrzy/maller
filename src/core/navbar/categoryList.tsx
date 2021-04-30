@@ -3,10 +3,7 @@ import { connect } from "react-redux";
 import Category from "../../interfaces/categories";
 import { Link } from "wouter";
 import { rootState } from "../../store/reducers/rootReducer";
-import SearchBy, {
-  SearchByCategory,
-  SearchBySubcategory,
-} from "../../interfaces/searchBy";
+import SearchBy, { SearchBySubcategory } from "../../interfaces/searchBy";
 import { setSearchByAction } from "../../store/actions/searchByActions";
 
 interface CategoryListProps {
@@ -47,18 +44,19 @@ const CategoryList: React.FC<CategoryListProps> = ({
         <ul>
           {categories.map((el, index) => {
             return (
-              <Link
-                key={index}
-                href={`/results`}
-                onClick={() => {
-                  setSearchByAction(
-                    new SearchByCategory(categories[index].main)
-                  );
-                  close();
-                }}
-              >
-                <li id="main-cat">{el.main}</li>
-              </Link>
+              // <Link
+              //   key={index}
+              //   href={`/results`}
+              //   onClick={() => {
+              //     setSearchByAction(
+              //       new SearchByCategory(categories[index].main)
+              //     );
+              //     close();
+              //   }}
+              // >
+              //   <li id="main-cat">{el.main}</li>
+              // </Link>
+              <li id="main-cat">{el.main}</li>
             );
           })}
         </ul>
