@@ -1,4 +1,4 @@
-//TODO: finish product interface
+import Comment from "./comment";
 
 interface Product {
   name: string;
@@ -8,6 +8,8 @@ interface Product {
   image?: string; // base64 string image
   docId?: string;
   rating?: number;
+  comments?: Array<Comment>;
+  path?: string;
 }
 
 export default Product;

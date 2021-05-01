@@ -62,7 +62,6 @@ const getInSubCategory = async (
     .doc(id)
     .get();
 
-  //TODO: update the products in db to have more fields
   const data = query.data();
   if (data !== undefined) {
     return {
@@ -71,6 +70,9 @@ const getInSubCategory = async (
       inStock: data.inStock,
       description: data.description,
       rating: data.rating,
+      comments: data.comments,
+      path: query.ref.path,
+      image: data.image,
     };
   } else {
     return new DbError("Cannot get data! Check your internet connection!");

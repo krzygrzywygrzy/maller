@@ -88,3 +88,7 @@ input::placeholder {
   user-select: none;
 }
 
+.loading {
+  text-align: center;
+  font-size: 1.25rem;
+}

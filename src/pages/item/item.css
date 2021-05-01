@@ -14,8 +14,17 @@
 }
 
 .mid-section-photos {
-  background: rgba(184, 184, 184, 0.3);
+  /* background: rgba(184, 184, 184, 0.3); */
+  border: 1px solid #e6e6e6;
   height: 400px;
+  display: flex;
+  justify-content: center;
+  padding: .5rem;
+}
+
+.mid-section-photos > img {
+  height: 100%;
+  max-width: 100%;
 }
 
 .mid-section-buy {
@@ -48,28 +57,41 @@
 }
 
 .buy-form > input[type="number"] {
-    border: 1px solid #e6e6e6;
-    padding: 5px;
-    text-align: center;
+  border: 1px solid #e6e6e6;
+  padding: 5px;
+  text-align: center;
 }
 
 .buy-form-additional {
-    margin-top: 1rem;
-    text-align: end;
-    font-size: 1.1rem;
+  margin-top: 1rem;
+  text-align: end;
+  font-size: 1.1rem;
 }
 
-.description > span{
-    padding: 0.5rem;
+.description > span {
+  padding: 0.5rem;
+}
+
+.desctipion-content {
+  padding: 0 .5rem;
 }
 
 .section-title {
-    font-size: 1.5rem;
-    border-bottom: 1px solid #e6e6e6;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .rating {
-    font-size: 0.5rem;
+  font-size: 0.5rem;
+}
+
+.comment-rating {
+  margin-left: 0.5rem;
+  margin-top: 3px;
+}
+
+.no-img {
+  line-height: 400px;
 }
