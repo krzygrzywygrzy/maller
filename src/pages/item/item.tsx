@@ -4,6 +4,7 @@ import CommentCard from "../../core/commentCard/commentCard";
 import showSnackBar from "../../core/functions/snackBar";
 import SearchBy from "../../models/searchBy";
 import { storage } from "../../services/firebase.config";
+import useGetImageUrl from "../../services/useGetImageUrl";
 import useGetSpecificItem from "../../services/useGetSpecificItem";
 import { rootState } from "../../store/reducers/rootReducer";
 import "./item.css";
@@ -19,27 +20,11 @@ const ItemPage: React.FC<ItemPageProps> = ({
 }: ItemPageProps) => {
   const response = useGetSpecificItem(docId, searchBy);
   const [amount, setAmount] = useState<number>(1);
-  const [imgUrl, setUrl] = useState<any>("");
 
-  //TODO: make custom hook out of it
+  const imageUrl = useGetImageUrl(response.item?.image);
+
   useEffect(() => {
-    const getImageUrl = async () => {
-      if (response.item && response.item.image) {
-        const storageRef = storage.ref();
-        storageRef
-          .child(response.item.image)
-          .getDownloadURL()
-          .then((url) => {
-            setUrl(url);
-          })
-          .catch(() => {
-            showSnackBar("Cannot get image!");
-          });
-      }
-    };
     document.title = `${response.item?.name}`;
-
-    getImageUrl();
   }, [response]);
 
   const changeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +41,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
           <div className="mid-section">
             <div className="mid-section-photos">
               {response.item?.image ? (
-                <img src={imgUrl} alt={response.item.name} />
+                <img src={imageUrl} alt={response.item.name} />
               ) : (
                 <div className="no-img">No image provided</div>
               )}
@@ -112,7 +97,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
               </div>
             ) : (
               <span className="desctipion-content">
-                No one have given feedback yet!{" "}
+                No one have given feedback yet!
               </span>
             )}
           </div>
