@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import CommentCard from "../../core/commentCard/commentCard";
-import showSnackBar from "../../core/functions/snackBar";
 import SearchBy from "../../models/searchBy";
-import { storage } from "../../services/firebase.config";
 import useGetImageUrl from "../../services/useGetImageUrl";
 import useGetSpecificItem from "../../services/useGetSpecificItem";
 import { rootState } from "../../store/reducers/rootReducer";
@@ -40,7 +38,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
           <div className="product-name">{response.item?.name} </div>
           <div className="mid-section">
             <div className="mid-section-photos">
-              {response.item?.image ? (
+              {response.item?.image && imageUrl !== "" ? (
                 <img src={imageUrl} alt={response.item.name} />
               ) : (
                 <div className="no-img">No image provided</div>

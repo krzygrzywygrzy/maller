@@ -4,13 +4,16 @@ import User from "../../models/user";
 import { rootState } from "../../store/reducers/rootReducer";
 import { useLocation } from "wouter";
 import "./profile.css";
+import { logOutAction } from "../../store/actions/authActions";
 
 interface ProfilePageProps {
   user: User;
+  logOutAction();
 }
 
 const ProfilePage: React.FC<ProfilePageProps> = ({
   user,
+  logOutAction,
 }: ProfilePageProps) => {
   // eslint-disable-next-line
   const [_, setLocation] = useLocation();
@@ -21,8 +24,17 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
     }
   }, [user, setLocation]);
 
+  useEffect(() => {
+    document.title = `Profile - ${user.name} ${user.surname}`;
+  }, [user.name, user.surname]);
+
   const addPaymentMethod = () => {
     console.log("payment!");
+  };
+
+  const handleLogOut = () => {
+    logOutAction();
+    setLocation("/login");
   };
 
   return (
@@ -30,9 +42,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
       <div className="container">
         <div className="profile">
           <div>
-            <div className="profile-orders">
-              No orders yet!
-            </div>
+            <div className="profile-orders">No orders yet!</div>
             <div className="profile-address"></div>
           </div>
           <div>
@@ -41,6 +51,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
                 <span>
                   {user.name} {user.surname}
                 </span>
+                <button onClick={handleLogOut}>log out</button>
               </div>
               <div className="info-email">
                 <span>email: {user.email}</span>
@@ -63,4 +74,10 @@ const mapStateToProps = (state: rootState) => {
   };
 };
 
-export default connect(mapStateToProps)(ProfilePage);
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    logOutAction: () => dispatch(logOutAction()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

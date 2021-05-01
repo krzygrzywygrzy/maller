@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import showSnackBar from "../core/functions/snackBar";
 import { storage } from "./firebase.config";
 
