@@ -7,7 +7,6 @@ interface Product {
   inStock?: number;
   image?: string; // base64 string image
   docId?: string;
-  rating?: number;
   comments?: Array<Comment>;
   path?: string;
 }

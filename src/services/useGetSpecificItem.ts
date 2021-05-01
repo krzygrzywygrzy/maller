@@ -69,7 +69,6 @@ const getInSubCategory = async (
       price: data.price,
       inStock: data.inStock,
       description: data.description,
-      rating: data.rating,
       comments: data.comments,
       path: query.ref.path,
       image: data.image,

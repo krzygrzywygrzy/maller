@@ -1,15 +1,17 @@
-import Basket from "../../models/basket";
-import Product from "../../models/product";
+import Basket, { BasketItem } from "../../models/basket";
 
 const initState: Basket = {
-  items: [
-    // {name: "DVD", price: 13, category: "Music", inStock: 13, image: ""}
-  ],
+  items: [],
 };
 
-type Action = { type: "ADD_ITEM"; payload: Product };
+type BasketAction =
+  | { type: "ADD_ITEM"; payload: BasketItem }
+  | { type: "REMOVE_ITEM"; payload: number };
 
-const shoppingBasketReducer = (state: Basket = initState, action: Action) => {
+const shoppingBasketReducer = (
+  state: Basket = initState,
+  action: BasketAction
+) => {
   switch (action.type) {
     default:
       break;
@@ -18,3 +20,4 @@ const shoppingBasketReducer = (state: Basket = initState, action: Action) => {
 };
 
 export default shoppingBasketReducer;
+export type { BasketAction };

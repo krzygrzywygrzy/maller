@@ -1,7 +1,11 @@
-import Product from "./product";
+interface BasketItem {
+  path: string;
+  amount: number;
+}
 
 interface Basket {
-  items: Array<Product>;
+  items: Array<BasketItem>;
 }
 
 export default Basket;
+export type { BasketItem };

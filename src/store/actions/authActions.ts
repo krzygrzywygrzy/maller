@@ -93,6 +93,9 @@ const authenticate = (
     });
 };
 
+/**
+ * manages to log out the user
+ */
 const logOutAction: ActionCreator<
   ThunkAction<void, rootState, void, AuthAction>
 > = () => {
