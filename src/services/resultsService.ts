@@ -1,9 +1,9 @@
-import Product from "../interfaces/product";
+import Product from "../models/product";
 import {
   SearchByCategory,
   SearchByPhrase,
   SearchBySubcategory,
-} from "../interfaces/searchBy";
+} from "../models/searchBy";
 import { db } from "./firebase.config";
 
 const getByCateogry = async (

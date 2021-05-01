@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import User from "../../interfaces/user";
+import User from "../../models/user";
 import { rootState } from "../../store/reducers/rootReducer";
 import { useLocation } from "wouter";
 import "./profile.css";

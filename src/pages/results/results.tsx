@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ProductCard from "../../core/productCard/productCard";
 import "./results.css";
 import { rootState } from "../../store/reducers/rootReducer";
-import SearchBy from "../../interfaces/searchBy";
+import SearchBy from "../../models/searchBy";
 import useSearchResults from "../../services/useSearchResults";
 
 interface ResultsPageProps {

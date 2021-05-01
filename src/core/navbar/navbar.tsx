@@ -1,13 +1,13 @@
 import { connect } from "react-redux";
 import { Link } from "wouter";
-import Basket from "../../interfaces/basket";
+import Basket from "../../models/basket";
 import "./navbar.css";
 import React, { useState, useEffect } from "react";
 import CategoryList from "./categoryList";
 import { getCategoryAction } from "../../store/actions/categoryActions";
-import Category from "../../interfaces/categories";
+import Category from "../../models/categories";
 import { rootState } from "../../store/reducers/rootReducer";
-import User from "../../interfaces/user";
+import User from "../../models/user";
 import { useLocation } from "wouter";
 
 interface NavbarProps {

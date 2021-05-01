@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
-import Basket from "../../interfaces/basket";
-import Category from "../../interfaces/categories";
-import User from "../../interfaces/user";
+import Basket from "../../models/basket";
+import Category from "../../models/categories";
+import User from "../../models/user";
 import authReducer from "./authReducer";
 import categoryReducer from "./categoryReducer";
 import shoppingBasketReducer from "./shoppingBasketReducer";
 
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import SearchBy from "../../interfaces/searchBy";
+import SearchBy from "../../models/searchBy";
 import searchByReducer from "./searchByReducer";
 
 /**

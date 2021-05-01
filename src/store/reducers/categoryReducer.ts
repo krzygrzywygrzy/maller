@@ -1,4 +1,4 @@
-import Category from "../../interfaces/categories";
+import Category from "../../models/categories";
 
 const initState: Array<Category> = [];
 

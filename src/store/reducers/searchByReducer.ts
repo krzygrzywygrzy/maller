@@ -1,4 +1,4 @@
-import SearchBy from "../../interfaces/searchBy";
+import SearchBy from "../../models/searchBy";
 
 const initState: SearchBy = {};
 

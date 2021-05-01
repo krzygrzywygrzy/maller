@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
-import SearchBy from "../../interfaces/searchBy";
+import SearchBy from "../../models/searchBy";
 
 import { rootState } from "../reducers/rootReducer";
 import { SearchByAction } from "../reducers/searchByReducer";

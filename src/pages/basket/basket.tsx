@@ -1,6 +1,6 @@
 import "./basket.css";
 import { connect } from "react-redux";
-import Basket from "../../interfaces/basket";
+import Basket from "../../models/basket";
 import { rootState } from "../../store/reducers/rootReducer";
 import React from "react";
 

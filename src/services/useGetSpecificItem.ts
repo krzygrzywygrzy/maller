@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { DbError } from "../core/errors/errors";
 import showSnackBar from "../core/functions/snackBar";
-import Product from "../interfaces/product";
+import Product from "../models/product";
 import SearchBy, {
   SearchByPhrase,
   SearchBySubcategory,
-} from "../interfaces/searchBy";
+} from "../models/searchBy";
 import { db } from "./firebase.config";
 
 /**
- * custom hook to get
+ * custom hook to get specific product form db
  * @param id
  * @param searchBy
  * @returns query {status}: @string && {item}: @product
@@ -82,3 +82,4 @@ const getInPhrase = async (): Promise<Product | DbError> => {
 };
 
 export default useGetSpecificItem;
+export { getInSubCategory };

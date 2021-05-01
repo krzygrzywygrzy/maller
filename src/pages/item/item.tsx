@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import SearchBy from "../../interfaces/searchBy";
+import SearchBy from "../../models/searchBy";
 import useGetSpecificItem from "../../services/useGetSpecificItem";
 import { rootState } from "../../store/reducers/rootReducer";
 import "./item.css";
@@ -17,20 +17,23 @@ const ItemPage: React.FC<ItemPageProps> = ({
   const response = useGetSpecificItem(docId, searchBy);
   const [amount, setAmount] = useState<number>(1);
 
+  useEffect(() => {
+    document.title = `${response.item?.name}`;
+  }, [response]);
+
   const changeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newAmount = parseInt(e.target.value);
     if (newAmount >= 0) setAmount(newAmount);
     else setAmount(0);
   };
 
-  const buildRating = () => {
-    let rating = "";
-    if (response.item && response.item.rating)
-      for (let i = 0; i < response.item.rating; i++) rating += "⭐";
-
-    console.log(rating);
-    return rating;
-  };
+  //   const buildRating = () => {
+  //     let rating = "";
+  //     if (response.item && response.item.rating)
+  //       for (let i = 0; i < response.item.rating; i++) rating += "⭐";
+  //     console.log(rating);
+  //     return rating;
+  //   };
 
   return (
     <div className="container unselectable">
@@ -61,7 +64,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
             </div>
           </div>
           <div className="description">
-            <div className="description-title">
+            <div className="section-title">
               <span>Description</span>
             </div>
             {response.item?.description ? (
@@ -69,6 +72,9 @@ const ItemPage: React.FC<ItemPageProps> = ({
             ) : (
               <span>Description for this product is not provided yet!</span>
             )}
+          </div>
+          <div className="opinions">
+            <div className="section-title">Opinions</div>
           </div>
         </div>
       )}

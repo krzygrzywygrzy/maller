@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Product from "../interfaces/product";
+import Product from "../models/product";
 import SearchBy, {
   SearchByCategory,
   SearchBySubcategory,
-} from "../interfaces/searchBy";
+} from "../models/searchBy";
 import { getByCateogry, getBySubcategory } from "./resultsService";
 
 /**

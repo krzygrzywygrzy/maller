@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link, useLocation } from "wouter";
-import User from "../../interfaces/user";
+import User from "../../models/user";
 import { signUpAction } from "../../store/actions/authActions";
 import "./auth.css";
 

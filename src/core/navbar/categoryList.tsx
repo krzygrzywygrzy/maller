@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import Category from "../../interfaces/categories";
+import Category from "../../models/categories";
 import { Link } from "wouter";
 import { rootState } from "../../store/reducers/rootReducer";
-import SearchBy, { SearchBySubcategory } from "../../interfaces/searchBy";
+import SearchBy, { SearchBySubcategory } from "../../models/searchBy";
 import { setSearchByAction } from "../../store/actions/searchByActions";
 
 interface CategoryListProps {

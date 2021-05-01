@@ -1,4 +1,4 @@
-import User from "../../interfaces/user";
+import User from "../../models/user";
 
 const initState: User = {
   name: "",

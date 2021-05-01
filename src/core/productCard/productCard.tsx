@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "../../interfaces/product";
+import Product from "../../models/product";
 import "./productCard.css";
 import { Link } from "wouter";
 

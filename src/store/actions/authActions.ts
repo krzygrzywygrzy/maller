@@ -3,7 +3,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { auth, db } from "../../services/firebase.config";
 import { rootState } from "../reducers/rootReducer";
 import firebase from "firebase";
-import User from "../../interfaces/user";
+import User from "../../models/user";
 import showSnackBar from "../../core/functions/snackBar";
 import { Dispatch } from "redux";
 import { AuthAction } from "../reducers/authReducer";
