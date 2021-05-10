@@ -36,4 +36,17 @@ const basketRemoveAction: ActionCreator<
   };
 };
 
-export { basketAddAction, basketRemoveAction };
+/**
+ * handles changing amount of product in basket
+ * @param index -> index of item in bakset array
+ * @param amount -> new amount
+ */
+const basketChangeAmountAction: ActionCreator<
+  ThunkAction<void, rootState, void, BasketAction>
+> = (index: number, amount: number) => {
+  return (dispatch: Dispatch<BasketAction>, state: Function) => {
+    //TODO: implement
+  };
+};
+
+export { basketAddAction, basketRemoveAction, basketChangeAmountAction };

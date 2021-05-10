@@ -4,6 +4,7 @@ import Basket from "../../models/basket";
 import { rootState } from "../../store/reducers/rootReducer";
 import React, { useEffect } from "react";
 import useGetByPath from "../../services/useGetByPath";
+import BasketItemCard from "./basketItem";
 
 interface BasketProps {
   basket: Basket;
@@ -25,7 +26,11 @@ const BasketPage: React.FC<BasketProps> = ({ basket }: BasketProps) => {
               {items.items.map((item, index) => {
                 return (
                   <div key={index}>
-                    {item.name} {item.price} {basket.items[index].amount}
+                    <BasketItemCard
+                      item={item}
+                      amount={basket.items[index].amount}
+                      index={index}
+                    />
                   </div>
                 );
               })}

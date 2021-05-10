@@ -16,6 +16,8 @@ const shoppingBasketReducer = (
     case "ADD_ITEM":
       state.items.push(action.payload);
       break;
+    case "REMOVE_ITEM":
+      break;
     default:
       break;
   }

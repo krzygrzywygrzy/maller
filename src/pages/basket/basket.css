@@ -23,3 +23,66 @@
   justify-content: center;
   font-size: 1.25rem;
 }
+
+.basket-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.basket-item:hover {
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16);
+}
+
+.basket-item-img {
+  height: 4rem;
+  width: 7rem;
+  background: #e6e6e6;
+
+  line-height: 4rem;
+  text-align: center;
+}
+
+.basket-item-img > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.basket-item-info {
+  margin-left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.item-info-title {
+  font-weight: 400;
+}
+
+.item-info-actions {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.info-acitions-input {
+  width: 2rem;
+  margin-right: 2rem;
+}
+
+input[type="number"] {
+  border: 1px solid #e6e6e6;
+  padding: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+.info-acitions-delete {
+  margin-left: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+}

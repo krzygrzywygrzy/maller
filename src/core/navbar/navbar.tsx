@@ -24,7 +24,6 @@ const Navbar: React.FC<NavbarProps> = ({
   user,
 }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
-
   // eslint-disable-next-line
   const [_, setLocation] = useLocation();
 
