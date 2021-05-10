@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import CommentCard from "../../core/commentCard/commentCard";
+import { BasketItem } from "../../models/basket";
 import SearchBy from "../../models/searchBy";
 import useGetImageUrl from "../../services/useGetImageUrl";
 import useGetSpecificItem from "../../services/useGetSpecificItem";
+import { basketAddAction } from "../../store/actions/shoppingBasketActions";
 import { rootState } from "../../store/reducers/rootReducer";
 import "./item.css";
 
 interface ItemPageProps {
   docId: string;
   searchBy: SearchBy;
+  addToBasket: (item: BasketItem) => {};
 }
 
 const ItemPage: React.FC<ItemPageProps> = ({
   docId,
   searchBy,
+  addToBasket,
 }: ItemPageProps) => {
   const response = useGetSpecificItem(docId, searchBy);
   const [amount, setAmount] = useState<number>(1);
@@ -56,7 +60,14 @@ const ItemPage: React.FC<ItemPageProps> = ({
                     changeAmount(e);
                   }}
                 ></input>
-                <button>Add to basket</button>
+                <button
+                  onClick={() => {
+                    if (response.item?.path)
+                      addToBasket({ amount, path: response.item?.path });
+                  }}
+                >
+                  Add to basket
+                </button>
               </div>
               <span>in stock: {response.item?.inStock}</span>
               <div className="buy-form-additional">
@@ -115,4 +126,10 @@ const mapStateToProps = (state: rootState) => {
   };
 };
 
-export default connect(mapStateToProps)(ItemPage);
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    addToBasket: (item: BasketItem) => dispatch(basketAddAction(item)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemPage);

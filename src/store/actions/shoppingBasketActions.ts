@@ -22,6 +22,12 @@ const basketAddAction: ActionCreator<
   };
 };
 
+//TODO: check if item exists in basket and if so add only extra amount
+
+/**
+ *
+ * @param index -> index of the item in state array
+ */
 const basketRemoveAction: ActionCreator<
   ThunkAction<void, rootState, void, BasketAction>
 > = (index: number) => {
@@ -30,4 +36,4 @@ const basketRemoveAction: ActionCreator<
   };
 };
 
-export { basketAddAction };
+export { basketAddAction, basketRemoveAction };

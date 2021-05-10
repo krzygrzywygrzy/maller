@@ -13,6 +13,9 @@ const shoppingBasketReducer = (
   action: BasketAction
 ) => {
   switch (action.type) {
+    case "ADD_ITEM":
+      state.items.push(action.payload);
+      break;
     default:
       break;
   }
