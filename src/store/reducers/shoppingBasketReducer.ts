@@ -18,7 +18,6 @@ const shoppingBasketReducer = (
       newState = [...state.items, action.payload];
       return { items: newState };
     case "REMOVE_ITEM":
-      console.log(action.payload);
       newState = state.items.filter((_, i) => i !== action.payload);
       return { items: newState };
     default:

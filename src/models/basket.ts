@@ -1,6 +1,9 @@
 interface BasketItem {
   path: string;
   amount: number;
+  name: string;
+  image?: string | undefined;
+  price: number;
 }
 
 interface Basket {

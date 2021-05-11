@@ -8,11 +8,10 @@ const CommentCard: React.FC<Comment> = ({ name, content, rating }) => {
 
   useEffect(() => {
     if (rating) {
-      const star = <Star height={14} />;
       let arr: Array<JSX.Element> = [];
       for (let i = 0; i < rating; i++) {
         //TODO: resolve problem with key
-        arr.push(star);
+        arr.push(React.createElement(StarRating, { key: i }));
       }
       setStars(arr);
     }
@@ -29,6 +28,10 @@ const CommentCard: React.FC<Comment> = ({ name, content, rating }) => {
       <div className="comment-rating">{stars}</div>
     </div>
   );
+};
+
+const StarRating: React.FC = () => {
+  return <Star height={14} />;
 };
 
 export default CommentCard;

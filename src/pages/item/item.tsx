@@ -63,7 +63,13 @@ const ItemPage: React.FC<ItemPageProps> = ({
                 <button
                   onClick={() => {
                     if (response.item?.path)
-                      addToBasket({ amount, path: response.item?.path });
+                      addToBasket({
+                        amount,
+                        path: response.item?.path,
+                        name: response.item.name,
+                        image: response.item.image,
+                        price: response.item.price
+                      });
                   }}
                 >
                   Add to basket

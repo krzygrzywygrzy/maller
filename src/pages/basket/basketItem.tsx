@@ -1,9 +1,10 @@
 import React from "react";
+import { BasketItem } from "../../models/basket";
 import Product from "../../models/product";
 import useGetImageUrl from "../../services/useGetImageUrl";
 
 interface BasketItemCardProps {
-  item: Product;
+  item: BasketItem
   amount: number;
   index: number;
   remove: Function;
@@ -16,6 +17,7 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({
   remove,
 }) => {
   const image = useGetImageUrl(item.image);
+
 
   return (
     <div className="basket-item">

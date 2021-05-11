@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Basket from "../../models/basket";
 import { rootState } from "../../store/reducers/rootReducer";
 import React, { useEffect } from "react";
-import useGetByPath from "../../services/useGetByPath";
 import BasketItemCard from "./basketItem";
 import { basketRemoveAction } from "../../store/actions/shoppingBasketActions";
 
@@ -17,38 +16,25 @@ const BasketPage: React.FC<BasketProps> = ({ basket, remove }: BasketProps) => {
     document.title = `basket (${basket.items.length})`;
   }, [basket.items.length]);
 
-  const items = useGetByPath(basket.items);
-
-  useEffect(() => {
-    console.log(basket.items);
-    console.log(items);
-  }, [basket.items, items]);
-
   const handleRemove = (index: number) => remove(index);
   return (
     <div className="container basket-container">
       {basket.items.length > 0 ? (
         <div>
-          {items.status === "success" ? (
-            <div className="item-list">
-              {items.items.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <BasketItemCard
-                      item={item}
-                      amount={basket.items[index].amount}
-                      index={index}
-                      remove={handleRemove}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="loading">
-              <span>loading...</span>
-            </div>
-          )}
+          <div className="item-list">
+            {basket.items.map((item, index) => {
+              return (
+                <div key={index}>
+                  <BasketItemCard
+                    item={item}
+                    amount={basket.items[index].amount}
+                    index={index}
+                    remove={handleRemove}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       ) : (
         <div className="empty-list">
