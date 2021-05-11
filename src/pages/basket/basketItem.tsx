@@ -1,13 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import { BasketItem } from "../../models/basket";
-import Product from "../../models/product";
 import useGetImageUrl from "../../services/useGetImageUrl";
 
 interface BasketItemCardProps {
-  item: BasketItem
+  item: BasketItem;
   amount: number;
   index: number;
   remove: Function;
+  changeAmount(index: number, amount: number): void;
 }
 
 const BasketItemCard: React.FC<BasketItemCardProps> = ({
@@ -15,9 +16,13 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({
   amount,
   index,
   remove,
+  changeAmount,
 }) => {
   const image = useGetImageUrl(item.image);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    changeAmount(index, parseInt(e.target.value));
+  };
 
   return (
     <div className="basket-item">
@@ -28,11 +33,11 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({
         <div className="item-info-title">{item.name}</div>
         <div className="item-info-actions">
           <div className="info-acitions-input">
-            <input type="number" value={amount} />
+            <input type="number" value={amount} onChange={handleChange} />
           </div>
           <div>{item.price * amount}$</div>
           <div className="info-acitions-delete" onClick={() => remove(index)}>
-            X
+            x
           </div>
         </div>
       </div>
@@ -40,4 +45,11 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({
   );
 };
 
-export default BasketItemCard;
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    changeAmount: (index: number, amount: number) =>
+      dispatch({ type: "CHANGE_AMOUNT", payload: { index, amount } }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(BasketItemCard);

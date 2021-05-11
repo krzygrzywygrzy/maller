@@ -45,7 +45,7 @@ const basketChangeAmountAction: ActionCreator<
   ThunkAction<void, rootState, void, BasketAction>
 > = (index: number, amount: number) => {
   return (dispatch: Dispatch<BasketAction>, state: Function) => {
-    //TODO: implement
+    dispatch({ type: "CHANGE_AMOUNT", payload: { index, amount } });
   };
 };
 

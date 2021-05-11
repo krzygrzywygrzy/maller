@@ -2,9 +2,8 @@ import "./basket.css";
 import { connect } from "react-redux";
 import Basket from "../../models/basket";
 import { rootState } from "../../store/reducers/rootReducer";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BasketItemCard from "./basketItem";
-import { basketRemoveAction } from "../../store/actions/shoppingBasketActions";
 
 interface BasketProps {
   basket: Basket;
@@ -15,12 +14,21 @@ const BasketPage: React.FC<BasketProps> = ({ basket, remove }: BasketProps) => {
   useEffect(() => {
     document.title = `basket (${basket.items.length})`;
   }, [basket.items.length]);
+  const [total, setTotal] = useState<number>(0);
+
+  useEffect(() => {
+    let t: number = 0;
+    for (let i = 0; i <= basket.items.length - 1; i++) {
+      t += basket.items[i].amount * basket.items[i].price;
+    }
+    setTotal(t);
+  }, [basket]);
 
   const handleRemove = (index: number) => remove(index);
   return (
-    <div className="container basket-container">
+    <div className="container">
       {basket.items.length > 0 ? (
-        <div>
+        <div className="basket-container">
           <div className="item-list">
             {basket.items.map((item, index) => {
               return (
@@ -34,6 +42,10 @@ const BasketPage: React.FC<BasketProps> = ({ basket, remove }: BasketProps) => {
                 </div>
               );
             })}
+          </div>
+          <div className="basket-summary">
+            <span>Total: {total}$</span><br></br>
+            <button>Checkout</button>
           </div>
         </div>
       ) : (
@@ -54,7 +66,8 @@ const mapStateToProps = (state: rootState) => {
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    remove: (index: number) => dispatch(basketRemoveAction(index)),
+    remove: (index: number) =>
+      dispatch({ type: "REMOVE_ITEM", payload: index }),
   };
 };
 
