@@ -20,6 +20,7 @@ import ProfilePage from "./pages/profile/profile";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import ItemPage from "./pages/item/item";
+import SummaryPage from "./pages/summary/summary";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const persistor = persistStore(store);
@@ -53,6 +54,9 @@ ReactDOM.render(
               {(params) => {
                 return <ItemPage docId={params.docId}></ItemPage>;
               }}
+            </Route>
+            <Route path="/summary">
+              <SummaryPage />
             </Route>
           </div>
           <Footer />

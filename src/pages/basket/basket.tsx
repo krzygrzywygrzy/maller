@@ -4,6 +4,7 @@ import Basket from "../../models/basket";
 import { rootState } from "../../store/reducers/rootReducer";
 import React, { useEffect, useState } from "react";
 import BasketItemCard from "./basketItem";
+import { useLocation } from "wouter";
 
 interface BasketProps {
   basket: Basket;
@@ -14,8 +15,9 @@ const BasketPage: React.FC<BasketProps> = ({ basket, remove }: BasketProps) => {
   useEffect(() => {
     document.title = `basket (${basket.items.length})`;
   }, [basket.items.length]);
+    // eslint-disable-next-line
+  const [_, setLocation] = useLocation();
   const [total, setTotal] = useState<number>(0);
-
   useEffect(() => {
     let t: number = 0;
     for (let i = 0; i <= basket.items.length - 1; i++) {
@@ -44,8 +46,9 @@ const BasketPage: React.FC<BasketProps> = ({ basket, remove }: BasketProps) => {
             })}
           </div>
           <div className="basket-summary">
-            <span>Total: {total}$</span><br></br>
-            <button>Checkout</button>
+            <span>Total: {total}$</span>
+            <br></br>
+            <button onClick={()=> {setLocation("/summary")}}>Checkout</button>
           </div>
         </div>
       ) : (
