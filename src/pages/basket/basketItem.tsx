@@ -1,8 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
 import Product from "../../models/product";
 import useGetImageUrl from "../../services/useGetImageUrl";
-import { basketRemoveAction } from "../../store/actions/shoppingBasketActions";
 
 interface BasketItemCardProps {
   item: Product;
@@ -32,7 +30,7 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({
           </div>
           <div>{item.price * amount}$</div>
           <div className="info-acitions-delete" onClick={() => remove(index)}>
-            x
+            X
           </div>
         </div>
       </div>
@@ -40,10 +38,4 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Function) => {
-  return {
-    remove: (index: number) => dispatch(basketRemoveAction(index)),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(BasketItemCard);
+export default BasketItemCard;

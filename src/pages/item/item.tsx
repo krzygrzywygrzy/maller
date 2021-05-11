@@ -95,12 +95,13 @@ const ItemPage: React.FC<ItemPageProps> = ({
               <div>
                 {response.item?.comments?.map((item, index) => {
                   return (
-                    <CommentCard
-                      key={index}
-                      name={item.name}
-                      content={item.content}
-                      rating={item.rating}
-                    />
+                    <div key={index}>
+                      <CommentCard
+                        name={item.name}
+                        content={item.content}
+                        rating={item.rating}
+                      />
+                    </div>
                   );
                 })}
               </div>

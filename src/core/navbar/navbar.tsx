@@ -75,7 +75,7 @@ const Navbar: React.FC<NavbarProps> = ({
       </div>
       <div className="category-container">
         <div
-          className="categories "
+          className="categories"
           onClick={() => {
             setShowCategory(!showCategory);
           }}

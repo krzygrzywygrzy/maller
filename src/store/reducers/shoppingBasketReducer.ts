@@ -12,16 +12,18 @@ const shoppingBasketReducer = (
   state: Basket = initState,
   action: BasketAction
 ) => {
+  let newState;
   switch (action.type) {
     case "ADD_ITEM":
-      state.items.push(action.payload);
-      break;
+      newState = [...state.items, action.payload];
+      return { items: newState };
     case "REMOVE_ITEM":
-      break;
+      console.log(action.payload);
+      newState = state.items.filter((_, i) => i !== action.payload);
+      return { items: newState };
     default:
-      break;
+      return state;
   }
-  return state;
 };
 
 export default shoppingBasketReducer;

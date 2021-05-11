@@ -5,18 +5,26 @@ import { rootState } from "../../store/reducers/rootReducer";
 import React, { useEffect } from "react";
 import useGetByPath from "../../services/useGetByPath";
 import BasketItemCard from "./basketItem";
+import { basketRemoveAction } from "../../store/actions/shoppingBasketActions";
 
 interface BasketProps {
   basket: Basket;
+  remove: Function;
 }
 
-const BasketPage: React.FC<BasketProps> = ({ basket }: BasketProps) => {
+const BasketPage: React.FC<BasketProps> = ({ basket, remove }: BasketProps) => {
   useEffect(() => {
     document.title = `basket (${basket.items.length})`;
   }, [basket.items.length]);
 
   const items = useGetByPath(basket.items);
 
+  useEffect(() => {
+    console.log(basket.items);
+    console.log(items);
+  }, [basket.items, items]);
+
+  const handleRemove = (index: number) => remove(index);
   return (
     <div className="container basket-container">
       {basket.items.length > 0 ? (
@@ -30,6 +38,7 @@ const BasketPage: React.FC<BasketProps> = ({ basket }: BasketProps) => {
                       item={item}
                       amount={basket.items[index].amount}
                       index={index}
+                      remove={handleRemove}
                     />
                   </div>
                 );
@@ -57,4 +66,10 @@ const mapStateToProps = (state: rootState) => {
   };
 };
 
-export default connect(mapStateToProps)(BasketPage);
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    remove: (index: number) => dispatch(basketRemoveAction(index)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BasketPage);
