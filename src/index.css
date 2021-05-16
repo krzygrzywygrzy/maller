@@ -54,9 +54,8 @@ input::placeholder {
   transform: translate(-50%);
   z-index: 1000;
 
-
   background: white;
-  padding: .75rem 2rem;
+  padding: 0.75rem 2rem;
   display: flex;
   justify-content: space-between;
 
@@ -91,4 +90,8 @@ input::placeholder {
 .loading {
   text-align: center;
   font-size: 1.25rem;
+}
+
+button {
+  font-family: inherit;
 }

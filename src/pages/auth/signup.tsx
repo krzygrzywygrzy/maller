@@ -17,8 +17,7 @@ const SignUpPage: React.FC<LogInPageProps> = ({
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
 
-  // eslint-disable-next-line
-  const [_, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const handleSubmit = () => {
     //TODO: check if data is correct

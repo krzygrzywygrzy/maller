@@ -5,4 +5,6 @@ class DbError extends Error {
   }
 }
 
-export { DbError };
+class UnauthenticatedError extends Error {}
+
+export { DbError, UnauthenticatedError };

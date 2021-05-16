@@ -14,9 +14,8 @@ const LogInPage: React.FC<LogInPageProps> = ({
 }: LogInPageProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
-  // eslint-disable-next-line
-  const [_, setLocation] = useLocation();
+  
+  const [, setLocation] = useLocation();
 
   const handleSubmit = () => {
     //TODO: check if email has proper format

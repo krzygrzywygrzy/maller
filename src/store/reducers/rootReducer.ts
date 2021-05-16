@@ -35,7 +35,7 @@ const rootReducer = combineReducers<rootState>({
 const persistConfig = {
   key: "user",
   storage,
-  whitelist: ["user"],
+  whitelist: ["user", "basket"],
 };
 
 export default persistReducer(persistConfig, rootReducer);

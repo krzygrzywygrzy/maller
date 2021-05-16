@@ -100,6 +100,7 @@ const logOutAction: ActionCreator<
   ThunkAction<void, rootState, void, AuthAction>
 > = () => {
   return (dispatch: Dispatch<AuthAction>) => {
+    auth.signOut();
     dispatch({ type: "LOG_OUT" });
   };
 };
