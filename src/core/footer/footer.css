@@ -12,3 +12,14 @@ footer > div {
   width: 1000px;
   margin: 0 auto;
 }
+
+@media (max-width: 1000px){
+  footer > div {
+    width: 100%;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.75rem;
+  }
+}

@@ -10,7 +10,6 @@ const CommentCard: React.FC<Comment> = ({ name, content, rating }) => {
     if (rating) {
       let arr: Array<JSX.Element> = [];
       for (let i = 0; i < rating; i++) {
-        //TODO: resolve problem with key
         arr.push(React.createElement(StarRating, { key: i }));
       }
       setStars(arr);

@@ -115,3 +115,48 @@ li:hover,
 .account-menu {
   position: absolute;
 }
+
+.burger-menu {
+  margin-right: 0.75rem;
+  margin-top: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+.phone-menu {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: calc(100vh - 100%);
+}
+
+.phone-menu-container {
+  width: 75%;
+  background: white;
+}
+
+.phone-menu-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.phone-menu-category {
+  font-weight: 400;
+  padding: 0.5rem;
+}
+
+@media (max-width: 1000px) {
+  .navbar-container {
+    width: 100%;
+  }
+
+  .navbar-options,
+  .search-box,
+  .category-container {
+    display: none;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+}

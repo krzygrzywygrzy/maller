@@ -9,12 +9,14 @@ import Category from "../../models/categories";
 import { rootState } from "../../store/reducers/rootReducer";
 import User from "../../models/user";
 import { useLocation } from "wouter";
+import { ReactComponent as MenuBurger } from "../../assets/icons/menu.svg";
+import MobileMenu from "./phoneMenu";
 
 interface NavbarProps {
   basket: Basket;
   categories: Array<Category>;
   user: User;
-  getCategories();
+  getCategories(): void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -24,8 +26,8 @@ const Navbar: React.FC<NavbarProps> = ({
   user,
 }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
-  // eslint-disable-next-line
-  const [_, setLocation] = useLocation();
+  const [showPhoneMenu, setShowPhoneMenu] = useState<boolean>(false);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     if (categories.length === 0) getCategories();
@@ -42,6 +44,10 @@ const Navbar: React.FC<NavbarProps> = ({
   const accountRedirect = () => {
     if (user.uid !== undefined) setLocation("/profile");
     else setLocation("/login");
+  };
+
+  const hideMobileMenu = () => {
+    setShowPhoneMenu(false);
   };
 
   return (
@@ -62,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
         </div>
-        <div className="navbar-options ">
+        <div className="navbar-options">
           <div className="navbar-account ">
             <span onClick={accountRedirect}>
               {user.uid !== undefined ? "Account" : "Log in"}
@@ -71,6 +77,12 @@ const Navbar: React.FC<NavbarProps> = ({
           <Link href="/basket" onClick={() => closeMenu()}>
             basket {basket.items.length}
           </Link>
+        </div>
+        <div className="burger-menu">
+          <MenuBurger
+            height={24}
+            onClick={() => setShowPhoneMenu(!showPhoneMenu)}
+          />
         </div>
       </div>
       <div className="category-container">
@@ -86,6 +98,13 @@ const Navbar: React.FC<NavbarProps> = ({
         <div className="side-category">Spring Sale!</div>
       </div>
       {showCategory && <CategoryList close={closeMenu} />}
+      {showPhoneMenu && (
+        <MobileMenu
+          basketLength={basket.items.length}
+          accountRedirect={accountRedirect}
+          hideMenu={hideMobileMenu}
+        />
+      )}
     </div>
   );
 };

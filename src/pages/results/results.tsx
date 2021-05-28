@@ -40,7 +40,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
       </div>
       {results.state === "success" && results.items.length > 0 && (
         <div className="results-side-menu">
-          <span>Filters</span>
+          {/* <span>Filters</span> */}
         </div>
       )}
     </div>
