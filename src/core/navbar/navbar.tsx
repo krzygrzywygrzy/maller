@@ -103,6 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({
           basketLength={basket.items.length}
           accountRedirect={accountRedirect}
           hideMenu={hideMobileMenu}
+          search={handleChange}
         />
       )}
     </div>

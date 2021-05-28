@@ -145,6 +145,16 @@ li:hover,
   padding: 0.5rem;
 }
 
+.phone-menu-search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.loop {
+  cursor: pointer;
+}
+
 @media (max-width: 1000px) {
   .navbar-container {
     width: 100%;
