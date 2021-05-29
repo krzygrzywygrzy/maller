@@ -2,6 +2,7 @@
   padding: 0 0.5rem;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   margin-bottom: 0.5rem;
 }
 
@@ -16,5 +17,33 @@
 }
 
 .comment-name {
-    font-weight: 400;
+  font-weight: 400;
+}
+
+.comment-card-user {
+  display: flex;
+  align-items: center;
+}
+.comment-rating {
+  margin-left: 0.5rem;
+  margin-top: 3px;
+}
+
+@media (max-width: 600px) {
+  .comment-card {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+  }
+  .comment-card-user {
+    display: block;
+  }
+
+  .avatar {
+    align-self: flex-start;
+  }
+
+  .comment-rating {
+    margin-left: 0 !important;
+  }
 }

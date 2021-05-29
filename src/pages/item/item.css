@@ -19,7 +19,7 @@
   height: 400px;
   display: flex;
   justify-content: center;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .mid-section-photos > img {
@@ -73,7 +73,7 @@
 }
 
 .desctipion-content {
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
 }
 
 .section-title {
@@ -94,4 +94,28 @@
 
 .no-img {
   line-height: 400px;
+}
+
+@media (max-width: 1000px) {
+  .mid-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mid-section-photos {
+    height: calc(100vw - 2rem);
+  }
+
+  .mid-section-buy {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .buy-price {
+    text-align: left;
+  }
+
+  .buy-form-additional {
+    display: none;
+  }
 }

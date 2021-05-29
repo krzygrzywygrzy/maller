@@ -21,10 +21,15 @@ const CommentCard: React.FC<Comment> = ({ name, content, rating }) => {
       <div className="avatar">
         <span>{name[0]}</span>
       </div>
-      <div>
-        <span className="comment-name">{name}</span>: <span>{content}</span>
+      <div className="comment-card-user">
+        <div>
+          <span className="comment-name">{name}</span>:
+        </div>
+        <div>
+          <span>{content}</span>
+        </div>
+        <div className="comment-rating">{stars}</div>
       </div>
-      <div className="comment-rating">{stars}</div>
     </div>
   );
 };

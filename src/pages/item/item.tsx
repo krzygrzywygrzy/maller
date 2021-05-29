@@ -12,7 +12,7 @@ import "./item.css";
 interface ItemPageProps {
   docId: string;
   searchBy: SearchBy;
-  addToBasket: (item: BasketItem) => {};
+  addToBasket(item: BasketItem): void;
 }
 
 const ItemPage: React.FC<ItemPageProps> = ({
@@ -68,7 +68,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
                         path: response.item?.path,
                         name: response.item.name,
                         image: response.item.image,
-                        price: response.item.price
+                        price: response.item.price,
                       });
                   }}
                 >
