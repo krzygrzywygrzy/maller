@@ -15,7 +15,7 @@ const BasketPage: React.FC<BasketProps> = ({ basket, remove }: BasketProps) => {
   useEffect(() => {
     document.title = `basket (${basket.items.length})`;
   }, [basket.items.length]);
-    // eslint-disable-next-line
+  // eslint-disable-next-line
   const [_, setLocation] = useLocation();
   const [total, setTotal] = useState<number>(0);
   useEffect(() => {
@@ -48,12 +48,18 @@ const BasketPage: React.FC<BasketProps> = ({ basket, remove }: BasketProps) => {
           <div className="basket-summary">
             <span>Total: {total}$</span>
             <br></br>
-            <button onClick={()=> {setLocation("/summary")}}>Checkout</button>
+            <button
+              onClick={() => {
+                setLocation("/summary");
+              }}
+            >
+              Checkout
+            </button>
           </div>
         </div>
       ) : (
         <div className="empty-list">
-          <span style={{ fontSize: "2rem" }}>Your bakset is empty!</span>
+          <span className="empty-list-title">Your bakset is empty!</span>
           <p>Add some product to order them easly!</p>
         </div>
       )}

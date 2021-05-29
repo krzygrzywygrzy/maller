@@ -24,6 +24,7 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({
     changeAmount(index, parseInt(e.target.value));
   };
 
+  //TODO: make responsive
   return (
     <div className="basket-item">
       <div className="basket-item-img">
