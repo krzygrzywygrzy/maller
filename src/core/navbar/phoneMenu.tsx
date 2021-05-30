@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { rootState } from "../../store/reducers/rootReducer";
 import Category from "../../models/categories";
 import { Link } from "wouter";
+import SearchBy, { SearchBySubcategory } from "../../models/searchBy";
+import { setSearchByAction } from "../../store/actions/searchByActions";
 
 //icons
 import { ReactComponent as Loop } from "../../assets/icons/loop.svg";
@@ -12,8 +14,6 @@ import { ReactComponent as ArrowDown } from "../../assets/icons/down_arr.svg";
 import { ReactComponent as ArrowUp } from "../../assets/icons/up_arr.svg";
 import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
-import SearchBy, { SearchBySubcategory } from "../../models/searchBy";
-import { setSearchByAction } from "../../store/actions/searchByActions";
 
 interface MobileMenuProps {
   basketLength: number;
@@ -55,8 +55,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     let newState = [...dropDownMenus];
     dropDownMenus[index] = !dropDownMenus[index];
     setDropDownMenus(newState);
-
-    console.log(dropDownMenus[index]);
   };
 
   return (
@@ -85,7 +83,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             hideMenu();
           }}
         >
-          <Cart height="20" className="icon" /> <div>Basket {basketLength}</div>
+          <Cart height="20" className="icon" />{" "}
+          <div>
+            Basket <span className="goods-amount">{basketLength}</span>
+          </div>
         </div>
         <div
           className="phone-menu-item"
@@ -122,22 +123,21 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                       <div>
                         {categories[index].sub.map((item, i) => {
                           return (
-                            <div key={i} className="drop-down-item">
-                              <Link
-                                href="/results"
-                                onClick={() => {
-                                  setSearchByAction(
-                                    new SearchBySubcategory(
-                                      categories[index].main,
-                                      item
-                                    )
-                                  );
-                                  hideMenu();
-                                }}
-                              >
-                                {item}
-                              </Link>
-                            </div>
+                            <Link
+                              key={i}
+                              href="/results"
+                              onClick={() => {
+                                setSearchByAction(
+                                  new SearchBySubcategory(
+                                    categories[index].main,
+                                    item
+                                  )
+                                );
+                                hideMenu();
+                              }}
+                            >
+                              <div className="drop-down-item">{item}</div>
+                            </Link>
                           );
                         })}
                       </div>

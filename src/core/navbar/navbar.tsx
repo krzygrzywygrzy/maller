@@ -12,6 +12,10 @@ import { useLocation } from "wouter";
 import { ReactComponent as MenuBurger } from "../../assets/icons/menu.svg";
 import MobileMenu from "./phoneMenu";
 
+//icons
+import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
+
 interface NavbarProps {
   basket: Basket;
   categories: Array<Category>;
@@ -73,13 +77,21 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
         <div className="navbar-options">
-          <div className="navbar-account ">
-            <span onClick={accountRedirect}>
-              {user.uid !== undefined ? "Account" : "Log in"}
+          <div className="navbar-account">
+            <span onClick={accountRedirect} className="navbar-icon-link">
+              <UserIcon height="18" className="icon" />
+              <div>{user.uid !== undefined ? "Account" : "Log in"}</div>
             </span>
           </div>
-          <Link href="/basket" onClick={() => closeMenu()}>
-            basket {basket.items.length}
+          <Link
+            href="/basket"
+            onClick={() => closeMenu()}
+            className="navbar-icon-link"
+          >
+            <Cart className="icon" height="18" />
+            <div>
+              Basket <span className="goods-amount">{basket.items.length}</span>
+            </div>
           </Link>
         </div>
         <div className="burger-menu">

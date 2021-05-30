@@ -45,3 +45,23 @@
 .info-name > button:focus {
   outline: none;
 }
+
+@media (max-width: 1000px) {
+  .profile {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .profile-orders,
+  .profile-address {
+    margin-right: 0;
+  }
+
+  .profile-orders,
+  .profile-address,
+  .profile-info {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+}
