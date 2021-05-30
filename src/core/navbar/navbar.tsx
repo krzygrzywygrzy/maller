@@ -41,6 +41,10 @@ const Navbar: React.FC<NavbarProps> = ({
     setShowCategory(false);
   };
 
+  /**
+   * if user is authenticated redirects to account page
+   * otherwise to log in form
+   */
   const accountRedirect = () => {
     if (user.uid !== undefined) setLocation("/profile");
     else setLocation("/login");

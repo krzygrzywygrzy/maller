@@ -20,6 +20,9 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({
 }) => {
   const image = useGetImageUrl(item.image);
 
+  /**
+   * changing amount of product to order
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeAmount(index, parseInt(e.target.value));
   };

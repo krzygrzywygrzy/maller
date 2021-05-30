@@ -4,11 +4,16 @@ import { useLocation } from "wouter";
 import { connect } from "react-redux";
 import { rootState } from "../../store/reducers/rootReducer";
 import Category from "../../models/categories";
+import { Link } from "wouter";
 
 //icons
 import { ReactComponent as Loop } from "../../assets/icons/loop.svg";
 import { ReactComponent as ArrowDown } from "../../assets/icons/down_arr.svg";
 import { ReactComponent as ArrowUp } from "../../assets/icons/up_arr.svg";
+import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
+import SearchBy, { SearchBySubcategory } from "../../models/searchBy";
+import { setSearchByAction } from "../../store/actions/searchByActions";
 
 interface MobileMenuProps {
   basketLength: number;
@@ -16,6 +21,7 @@ interface MobileMenuProps {
   hideMenu(): void;
   search(phrase: string): void;
   categories: Array<Category>;
+  setSearchByAction(searchBy: SearchBy): void;
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({
@@ -24,6 +30,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   hideMenu,
   search,
   categories,
+  setSearchByAction,
 }) => {
   const [, setLocation] = useLocation();
   const [phrase, setPhrase] = useState<string>("");
@@ -43,9 +50,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
    * @param index -> index of category in array
    */
   const toogleMenu = (index: number) => {
-    //TODO: arrows don't update
+    //TODO: menu's visibility doesn't update after click
 
-    let newState = dropDownMenus;
+    let newState = [...dropDownMenus];
     dropDownMenus[index] = !dropDownMenus[index];
     setDropDownMenus(newState);
 
@@ -78,7 +85,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             hideMenu();
           }}
         >
-          basket {basketLength}
+          <Cart height="20" className="icon" /> <div>Basket {basketLength}</div>
         </div>
         <div
           className="phone-menu-item"
@@ -87,7 +94,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             accountRedirect();
           }}
         >
-          account
+          <UserIcon height="20" className="icon" /> <div>Account</div>
         </div>
         <div className="phone-menu-category">Products</div>
         <div>
@@ -97,10 +104,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             <div>
               {categories.map((item, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <div
                       className="phone-menu-item drop-down-menu"
-                      key={index}
                       onClick={() => toogleMenu(index)}
                     >
                       <div>{item.main}</div>
@@ -114,10 +120,23 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                     </div>
                     {!dropDownMenus[index] && (
                       <div>
-                        {categories[index].sub.map((item, index) => {
+                        {categories[index].sub.map((item, i) => {
                           return (
-                            <div key={index} className="drop-down-item">
-                              {item}
+                            <div key={i} className="drop-down-item">
+                              <Link
+                                href="/results"
+                                onClick={() => {
+                                  setSearchByAction(
+                                    new SearchBySubcategory(
+                                      categories[index].main,
+                                      item
+                                    )
+                                  );
+                                  hideMenu();
+                                }}
+                              >
+                                {item}
+                              </Link>
                             </div>
                           );
                         })}
@@ -140,4 +159,11 @@ const mapStateToProps = (state: rootState) => {
   };
 };
 
-export default connect(mapStateToProps)(MobileMenu);
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    setSearchByAction: (searchBy: SearchBy) =>
+      dispatch(setSearchByAction(searchBy)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobileMenu);

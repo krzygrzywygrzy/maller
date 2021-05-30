@@ -96,6 +96,10 @@ button {
   font-family: inherit;
 }
 
+.icon {
+  margin-right: 10px;
+}
+
 @media (max-width: 1000px) {
   .container {
     width: 100%;
