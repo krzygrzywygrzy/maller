@@ -96,8 +96,12 @@ button {
   font-family: inherit;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   .container {
     width: 100%;
+  }
+
+  .snack-bar {
+    width: 95%;
   }
 }

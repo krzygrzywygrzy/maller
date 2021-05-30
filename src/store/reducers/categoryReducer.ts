@@ -11,9 +11,11 @@ type CategoryAction = { type: "LOAD_CATEGORIES"; payload: Array<Category> };
 const categoryReducer = (state = initState, action: CategoryAction) => {
   switch (action.type) {
     case "LOAD_CATEGORIES":
-      state = action.payload;
+      return action.payload;
+
+    default:
+      return state;
   }
-  return state;
 };
 
 export default categoryReducer;
