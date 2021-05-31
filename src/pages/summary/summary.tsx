@@ -17,11 +17,39 @@ const SummaryPage: React.FC<SummaryPageProps> = ({ basket }) => {
 
   const [showAddressForm, setShowAddressForm] = useState<boolean>(false);
 
+  //payment
+  const [chosenPayment, setChosenPayment] = useState<number>(1);
+  //TODO: get options from firebase
+  const paymentMethods: Array<string> = [
+    "Visa",
+    "MasterCard",
+    "PayPal",
+    "cash on delivery",
+  ];
+
+  //if basket is empty redirects to home screen
+  //checkout won't happen with empty basket
   useEffect(() => {
     if (basket.items.length === 0) setLocation("/");
 
     document.title = "summary";
   }, [basket, setLocation]);
+
+  //get total price of all products
+  //TODO: make custom hook to use it here and in basket screen
+  const [total, setTotal] = useState<number>(0);
+  useEffect(() => {
+    let t: number = 0;
+    for (let i = 0; i <= basket.items.length - 1; i++) {
+      t += basket.items[i].amount * basket.items[i].price;
+    }
+    setTotal(t);
+  }, [basket]);
+
+  // handles checking out
+  const checkout = () => {
+    console.log("checkout");
+  };
 
   return (
     <div className="container summary">
@@ -31,7 +59,7 @@ const SummaryPage: React.FC<SummaryPageProps> = ({ basket }) => {
         </div>
         <div className="summary-section">
           <span>Address</span>
-          <div>
+          <div className="mb1">
             {addresses.status === "success" ? (
               <div>
                 {addresses.data.map((item, index) => {
@@ -59,10 +87,38 @@ const SummaryPage: React.FC<SummaryPageProps> = ({ basket }) => {
             )}
             {showAddressForm && <AddressForm />}
           </div>
+          <span>Payment</span>
+          <div>
+            {paymentMethods.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={() => setChosenPayment(index)}
+                  className="payment-card"
+                >
+                  {item} {index === chosenPayment && <span>selected</span>}
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div></div>
       </div>
-      <div>checkout</div>
+      <div className="summary-checkout">
+        <span className="summary-basket-title">In your basket:</span>
+        <br />
+        {basket.items.map((item, index) => {
+          return (
+            <div key={index} className="summary-basket-item">
+              {item.name} x{item.amount}
+            </div>
+          );
+        })}
+        <div className="summary-total">
+          <span>Total: {total}$</span>
+        </div>
+        <button onClick={() => checkout()}>Checkout</button>
+      </div>
     </div>
   );
 };

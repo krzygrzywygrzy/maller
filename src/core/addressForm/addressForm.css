@@ -6,5 +6,11 @@
 }
 
 .address-form > span {
-    color: #f19c79;
+  color: #f19c79;
+}
+
+@media (max-width: 600px) {
+  .address-form {
+    width: calc(100% - 2rem);
+  }
 }

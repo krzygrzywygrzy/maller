@@ -1,6 +1,6 @@
 .summary {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 7fr 3fr;
 }
 
 .summary-options {
@@ -19,4 +19,46 @@
   background: #373f51;
 
   margin-top: 0.5rem;
+}
+
+.summary-checkout {
+  padding: 0 1rem;
+  border-left: 1px solid #e6e6e6;
+}
+
+.summary-total {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.summary-basket-title {
+  font-size: 1.25rem;
+}
+
+.summary-basket-item {
+  margin-left: 1rem;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0.25rem 0;
+}
+
+.summary-checkout > button {
+  margin-left: 0 !important;
+}
+
+.payment-card {
+  padding: 0.25rem 1rem;
+}
+
+@media (max-width: 1000px) {
+  .summary {
+    display: block;
+  }
+
+  .summary-checkout {
+    border-top: 1px solid #e6e6e6;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    padding-top: 1rem;
+    border-left: none;
+  }
 }

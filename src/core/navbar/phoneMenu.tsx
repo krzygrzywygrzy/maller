@@ -10,7 +10,9 @@ import { setSearchByAction } from "../../store/actions/searchByActions";
 
 //icons
 import { ReactComponent as Loop } from "../../assets/icons/loop.svg";
+// eslint-disable-next-line
 import { ReactComponent as ArrowDown } from "../../assets/icons/down_arr.svg";
+// eslint-disable-next-line
 import { ReactComponent as ArrowUp } from "../../assets/icons/up_arr.svg";
 import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
@@ -112,11 +114,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                     >
                       <div>{item.main}</div>
                       <div>
-                        {!dropDownMenus[index] ? (
+                        {/* {!dropDownMenus[index] ? (
                           <ArrowUp height="16" />
                         ) : (
                           <ArrowDown height="16" />
-                        )}
+                        )} */}
                       </div>
                     </div>
                     {!dropDownMenus[index] && (

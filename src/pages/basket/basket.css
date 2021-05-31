@@ -95,7 +95,8 @@ input[type="number"] {
   padding-left: 2rem;
 }
 
-.basket-summary > button {
+.basket-summary > button,
+.summary-checkout > button {
   color: white;
   border: none;
   background: #373f51;
@@ -136,5 +137,11 @@ button:focus {
 
   .basket-summary > button {
     margin-left: 0;
+  }
+
+  .basket-item-info {
+    display: grid;
+    flex-direction: column;
+    justify-content: start;
   }
 }
