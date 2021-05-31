@@ -47,6 +47,19 @@
 
 .payment-card {
   padding: 0.25rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.mark {
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.mark-orange {
+  background: #f19c79;
 }
 
 @media (max-width: 1000px) {

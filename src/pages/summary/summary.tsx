@@ -9,13 +9,21 @@ import AddressForm from "../../core/addressForm/addressForm";
 
 interface SummaryPageProps {
   basket: Basket;
+  clearBasketAction(): void;
 }
 
-const SummaryPage: React.FC<SummaryPageProps> = ({ basket }) => {
+const SummaryPage: React.FC<SummaryPageProps> = ({
+  basket,
+  clearBasketAction,
+}) => {
   const [, setLocation] = useLocation();
-  const addresses = useGetAddresses();
 
+  //addresses
+  const addresses = useGetAddresses();
   const [showAddressForm, setShowAddressForm] = useState<boolean>(false);
+  //TODO: choose addresses
+  // eslint-disable-next-line
+  const [chosenAddress, setChosenAddres] = useState<number>(0);
 
   //payment
   const [chosenPayment, setChosenPayment] = useState<number>(1);
@@ -27,7 +35,7 @@ const SummaryPage: React.FC<SummaryPageProps> = ({ basket }) => {
     "cash on delivery",
   ];
 
-  //if basket is empty redirects to home screen
+  //if basket is empty redirects to home screeCLEAR_BASKET
   //checkout won't happen with empty basket
   useEffect(() => {
     if (basket.items.length === 0) setLocation("/");
@@ -48,7 +56,7 @@ const SummaryPage: React.FC<SummaryPageProps> = ({ basket }) => {
 
   // handles checking out
   const checkout = () => {
-    console.log("checkout");
+    //clearBasketAction();
   };
 
   return (
@@ -96,7 +104,12 @@ const SummaryPage: React.FC<SummaryPageProps> = ({ basket }) => {
                   onClick={() => setChosenPayment(index)}
                   className="payment-card"
                 >
-                  {item} {index === chosenPayment && <span>selected</span>}
+                  {index === chosenPayment ? (
+                    <div className="mark mark-orange"></div>
+                  ) : (
+                    <div className="mark"></div>
+                  )}
+                  <div>{item}</div>
                 </div>
               );
             })}
@@ -128,4 +141,11 @@ const mapStateToProps = (state: rootState) => {
     basket: state.basket,
   };
 };
-export default connect(mapStateToProps)(SummaryPage);
+
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    clearBasketAction: () => dispatch({ type: "CLEAR_BASKET" }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SummaryPage);

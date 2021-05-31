@@ -7,7 +7,8 @@ const initState: Basket = {
 type BasketAction =
   | { type: "ADD_ITEM"; payload: BasketItem }
   | { type: "REMOVE_ITEM"; payload: number }
-  | { type: "CHANGE_AMOUNT"; payload: { index: number; amount: number } };
+  | { type: "CHANGE_AMOUNT"; payload: { index: number; amount: number } } 
+  | {type: "CLEAR_BASKET"};
 
 const shoppingBasketReducer = (
   state: Basket = initState,
@@ -25,6 +26,9 @@ const shoppingBasketReducer = (
       newState = state.items;
       newState[action.payload.index].amount = action.payload.amount;
       return { items: newState };
+    case "CLEAR_BASKET": {
+      return {items: []};
+    }
     default:
       return state;
   }
