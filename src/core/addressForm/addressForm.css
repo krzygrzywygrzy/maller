@@ -3,10 +3,21 @@
   border: 1px solid #e6e6e6;
   padding: 1rem;
   width: 70%;
+  margin-top: 0.5rem;
 }
 
 .address-form > span {
   color: #f19c79;
+}
+
+.address-form > button {
+  border: none;
+  cursor: pointer;
+  background: #373f51;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 2px;
 }
 
 @media (max-width: 600px) {

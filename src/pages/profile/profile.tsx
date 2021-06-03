@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import User from "../../models/user";
 import { rootState } from "../../store/reducers/rootReducer";
@@ -7,6 +7,9 @@ import { logOutAction } from "../../store/actions/authActions";
 import "./profile.css";
 import useGetOrders from "../../services/useGetOrders";
 import OrderCard from "../../core/orderCard/orderCard";
+import useGetAddresses from "../../services/useGetAddreses";
+import AddressForm from "../../core/addressForm/addressForm";
+import Address from "../../models/address";
 
 interface ProfilePageProps {
   user: User;
@@ -40,32 +43,80 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   //getting orders
   const orders = useGetOrders();
 
+  //
+  //addresses
+  const addresses = useGetAddresses();
+  const [showAddressForm, setShowAddressForm] = useState<boolean>(false);
+  const saveNewAddress = (address: Address) => {
+    //saveNewAddress(address);
+    //TODO: repair to much recursion error
+    setShowAddressForm(false);
+  };
+
   return (
     <div>
       <div className="container">
         <div className="profile">
           <div>
-            <div className="profile-orders">
-              <div className="profile-section-title">
-                <span>Your orders</span>
+            <section>
+              <div className="profile-orders">
+                <div className="profile-section-title">
+                  <span>Your orders</span>
+                </div>
+                {orders.status === "success" ? (
+                  <div>
+                    {orders.data.map((item, index) => {
+                      return (
+                        <OrderCard key={index} index={index} order={item} />
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div>
+                    <span>
+                      {orders.status === "error"
+                        ? "and error accoured while loading your orders history..."
+                        : "loading..."}
+                    </span>
+                  </div>
+                )}
               </div>
-              {orders.status === "success" ? (
-                <div>
-                  {orders.data.map((item, index) => {
-                    return <OrderCard key={index} index={index} order={item} />;
-                  })}
+            </section>
+            <section>
+              <div className="profile-address">
+                <div className="profile-section-title">
+                  <span>Your addressess</span>
                 </div>
-              ) : (
-                <div>
-                  <span>
-                    {orders.status === "error"
-                      ? "and error accoured while loading your orders history..."
-                      : "loading..."}
-                  </span>
-                </div>
-              )}
-            </div>
-            <div className="profile-address"></div>
+                {addresses.status === "success" ? (
+                  <div>
+                    {addresses.data.length > 0 ? (
+                      <div></div>
+                    ) : (
+                      <div>
+                        <span>You have no saved adresses</span>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {" "}
+                    <span>
+                      {addresses.status === "error"
+                        ? "and error accoured while loading list of your addresses..."
+                        : "loading..."}
+                    </span>
+                  </div>
+                )}
+
+                {showAddressForm ? (
+                  <AddressForm saveData={saveNewAddress} />
+                ) : (
+                  <button onClick={() => setShowAddressForm(true)}>
+                    Add address
+                  </button>
+                )}
+              </div>
+            </section>
           </div>
           <div>
             <div className="profile-info">
