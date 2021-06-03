@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { DbError, UnauthenticatedError } from "../core/errors/errors";
+import { DbError } from "../core/errors/errors";
 import Address from "../models/address";
 import { auth, db } from "./firebase.config";
 
@@ -28,7 +28,7 @@ const useGetAddresses = () => {
               setData(data.addresses);
             setStatus("success");
           } else throw DbError;
-        } else throw UnauthenticatedError;
+        } else setStatus("success");
       } catch (e) {
         console.log(e);
         setStatus("error");

@@ -6,6 +6,8 @@ import "./summary.css";
 import { useLocation } from "wouter";
 import useGetAddresses from "../../services/useGetAddreses";
 import AddressForm from "../../core/addressForm/addressForm";
+import checkoutService from "../../services/checkout";
+import showSnackBar from "../../core/functions/snackBar";
 
 interface SummaryPageProps {
   basket: Basket;
@@ -18,14 +20,19 @@ const SummaryPage: React.FC<SummaryPageProps> = ({
 }) => {
   const [, setLocation] = useLocation();
 
+  //
   //addresses
+  //
   const addresses = useGetAddresses();
   const [showAddressForm, setShowAddressForm] = useState<boolean>(false);
+
   //TODO: choose addresses
   // eslint-disable-next-line
   const [chosenAddress, setChosenAddres] = useState<number>(0);
 
+  //
   //payment
+  //
   const [chosenPayment, setChosenPayment] = useState<number>(1);
   //TODO: get options from firebase
   const paymentMethods: Array<string> = [
@@ -55,8 +62,15 @@ const SummaryPage: React.FC<SummaryPageProps> = ({
   }, [basket]);
 
   // handles checking out
-  const checkout = () => {
-    //clearBasketAction();
+  const checkout = async () => {
+    const result = await checkoutService(basket, paymentMethods[chosenPayment]);
+    if (result === "success") {
+      clearBasketAction();
+      showSnackBar("Success! Your order will be completed soon!");
+      setLocation("/");
+    } else {
+      showSnackBar("Cannot checkout! Check your internet connection");
+    }
   };
 
   return (
