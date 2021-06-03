@@ -13,7 +13,7 @@ const checkoutService = async (basket: Basket, payment: string): Promise<Feedbac
                 basket, paymentStatus: payment === "cash on delivery" ? "cash on delivery": "paid"               
             })
         });
-
+        
         //TODO: check if data is order is added to collection
 
         //decrease amount of items in db

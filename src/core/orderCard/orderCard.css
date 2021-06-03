@@ -1,0 +1,52 @@
+.order-card {
+  padding: 1rem;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.order-card:hover {
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16);
+}
+
+.order-card-header {
+  display: grid;
+  grid-template-columns: 1fr 5fr 5fr;
+  margin-bottom: 1rem;
+}
+
+.order-card-items {
+  display: flex;
+}
+
+.order-status {
+  color: #f19c79;
+}
+
+.order-card-img {
+  height: 60px;
+  width: 60px;
+
+  margin-right: 1rem;
+}
+
+.order-card-img > img {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.no-img {
+  text-align: center;
+  line-height: 60px;
+  background: #e6e6e6;
+}
+
+@media (max-width: 600px) {
+  .order-card-header {
+    display: block;
+  }
+
+  .order-index {
+    display: none;
+  }
+}

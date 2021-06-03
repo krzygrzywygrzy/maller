@@ -46,6 +46,11 @@
   outline: none;
 }
 
+.profile-section-title {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
 @media (max-width: 1000px) {
   .profile {
     display: flex;
