@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import CommentCard from "../../core/commentCard/commentCard";
-import { BasketItem } from "../../models/basket";
+import Basket, { BasketItem } from "../../models/basket";
 import SearchBy from "../../models/searchBy";
 import useGetImageUrl from "../../services/useGetImageUrl";
 import useGetSpecificItem from "../../services/useGetSpecificItem";
@@ -13,12 +13,16 @@ interface ItemPageProps {
   docId: string;
   searchBy: SearchBy;
   addToBasket(item: BasketItem): void;
+  basket: Basket;
+  addAmountToBasket(amount: number, index: number): void;
 }
 
 const ItemPage: React.FC<ItemPageProps> = ({
   docId,
   searchBy,
   addToBasket,
+  basket,
+  addAmountToBasket,
 }: ItemPageProps) => {
   const response = useGetSpecificItem(docId, searchBy);
   const [amount, setAmount] = useState<number>(1);
@@ -33,6 +37,31 @@ const ItemPage: React.FC<ItemPageProps> = ({
     const newAmount = parseInt(e.target.value);
     if (newAmount >= 0) setAmount(newAmount);
     else setAmount(0);
+  };
+
+  const handleBasket = () => {
+    //check if product is in basket & assign index of it if exists
+    let index: number | undefined;
+    for (let i = 0; i < basket.items.length; i++) {
+      if (basket.items[i].path === response.item?.path) {
+        index = i;
+        break;
+      }
+    }
+
+    //if product is in basket change its amount
+    if (index !== undefined) addAmountToBasket(amount, index);
+    //else add new item to basket
+    else {
+      if (response.item?.path)
+        addToBasket({
+          amount,
+          path: response.item?.path,
+          name: response.item.name,
+          image: response.item.image,
+          price: response.item.price,
+        });
+    }
   };
 
   return (
@@ -60,20 +89,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
                     changeAmount(e);
                   }}
                 ></input>
-                <button
-                  onClick={() => {
-                    if (response.item?.path)
-                      addToBasket({
-                        amount,
-                        path: response.item?.path,
-                        name: response.item.name,
-                        image: response.item.image,
-                        price: response.item.price,
-                      });
-                  }}
-                >
-                  Add to basket
-                </button>
+                <button onClick={() => handleBasket()}>Add to basket</button>
               </div>
               <span>in stock: {response.item?.inStock}</span>
               <div className="buy-form-additional">
@@ -130,12 +146,15 @@ const ItemPage: React.FC<ItemPageProps> = ({
 const mapStateToProps = (state: rootState) => {
   return {
     searchBy: state.searchBy,
+    basket: state.basket,
   };
 };
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     addToBasket: (item: BasketItem) => dispatch(basketAddAction(item)),
+    addAmountToBasket: (amount: number, index: number) =>
+      dispatch({ type: "ADD_ITEM_AMOUNT", payload: { amount, index } }),
   };
 };
 

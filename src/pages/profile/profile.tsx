@@ -85,6 +85,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
             <section>
               <div className="profile-address">
                 <div className="profile-section-title">
+                  <br />
                   <span>Your addressess</span>
                 </div>
                 {addresses.status === "success" ? (
