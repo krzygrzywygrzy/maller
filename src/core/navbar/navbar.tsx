@@ -15,6 +15,7 @@ import MobileMenu from "./phoneMenu";
 //icons
 import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
+import useSearchInDB from "../../services/useSearchInDB";
 
 interface NavbarProps {
   basket: Basket;
@@ -31,15 +32,24 @@ const Navbar: React.FC<NavbarProps> = ({
 }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [showPhoneMenu, setShowPhoneMenu] = useState<boolean>(false);
+  const [showSearchBox, setShowSearchBox] = useState<boolean>(false);
   const [, setLocation] = useLocation();
 
   useEffect(() => {
     if (categories.length === 0) getCategories();
   }, [categories.length, getCategories]);
 
-  const handleChange = (phrase: string) => {
-    //TODO: search in db
+  //searching in db
+  const [phrase, setPhrase] = useState<string>("");
+  const searchResponse = useSearchInDB(phrase);
+  const handleChange = (p: string) => {
+    if (!showSearchBox) setShowSearchBox(true);
+    setPhrase(p);
   };
+
+  useEffect(() => {
+    //TODO: add event listener that closes menu when clicked outside of it
+  }, [showSearchBox]);
 
   const closeMenu = () => {
     setShowCategory(false);
