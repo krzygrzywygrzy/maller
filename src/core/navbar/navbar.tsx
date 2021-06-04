@@ -16,6 +16,7 @@ import MobileMenu from "./phoneMenu";
 import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import useSearchInDB from "../../services/useSearchInDB";
+import SearchBox from "./searchBox";
 
 interface NavbarProps {
   basket: Basket;
@@ -48,9 +49,11 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   useEffect(() => {
-    //TODO: add event listener that closes menu when clicked outside of it
+    if (showSearchBox) {
+    }
   }, [showSearchBox]);
 
+  //close menu
   const closeMenu = () => {
     setShowCategory(false);
   };
@@ -85,6 +88,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <span>search</span>
             </div>
           </div>
+          <div>{showSearchBox && <SearchBox results={searchResponse} />}</div>
         </div>
         <div className="navbar-options">
           <div className="navbar-account">

@@ -8,7 +8,12 @@ type SearchStatus =
   | "loadnew"
   | "loadnew error";
 
-const useSearchInDB = (phrase: string) => {
+interface SearchResults {
+  status: string;
+  data: Product[];
+}
+
+const useSearchInDB = (phrase: string): SearchResults => {
   const [status, setStatus] = useState<SearchStatus>("idle");
   const [data, setData] = useState<Array<Product>>([]);
 
@@ -16,7 +21,12 @@ const useSearchInDB = (phrase: string) => {
     const search = async () => {
       //TODO: search using algolia
     };
+
+    search();
   }, [phrase]);
+
+  return { status, data };
 };
 
 export default useSearchInDB;
+export type { SearchResults };
