@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Link } from "wouter";
 import Basket from "../../models/basket";
 import "./navbar.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CategoryList from "./categoryList";
 import { getCategoryAction } from "../../store/actions/categoryActions";
 import Category from "../../models/categories";
@@ -17,6 +17,7 @@ import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import useSearchInDB from "../../services/useSearchInDB";
 import SearchBox from "./searchBox";
+import useOutsideClick from "../functions/useOutsideClick";
 
 interface NavbarProps {
   basket: Basket;
@@ -25,12 +26,7 @@ interface NavbarProps {
   getCategories(): void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({
-  basket,
-  categories,
-  getCategories,
-  user,
-}: NavbarProps) => {
+const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [showPhoneMenu, setShowPhoneMenu] = useState<boolean>(false);
   const [showSearchBox, setShowSearchBox] = useState<boolean>(false);
@@ -40,18 +36,34 @@ const Navbar: React.FC<NavbarProps> = ({
     if (categories.length === 0) getCategories();
   }, [categories.length, getCategories]);
 
-  //searching in db
+  /**
+   * db text search
+   */
   const [phrase, setPhrase] = useState<string>("");
   const searchResponse = useSearchInDB(phrase);
-  const handleChange = (p: string) => {
+
+  //react to phrase change
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     if (!showSearchBox) setShowSearchBox(true);
-    setPhrase(p);
+    setShowCategory(false);
+    setPhrase(e.target.value);
   };
 
+  //close menu when phrase is empty
   useEffect(() => {
-    if (showSearchBox) {
-    }
-  }, [showSearchBox]);
+    if (phrase.length === 0) setShowSearchBox(false);
+  }, [phrase]);
+
+  //close menu when clicked outside
+  const searchResultsBoxRef = useRef(null);
+  useOutsideClick(searchResultsBoxRef, () => {
+    setShowSearchBox(false);
+    setPhrase("");
+  });
+
+  /**
+   * end of db text search
+   */
 
   //close menu
   const closeMenu = () => {
@@ -71,6 +83,10 @@ const Navbar: React.FC<NavbarProps> = ({
     setShowPhoneMenu(false);
   };
 
+  //hide categories menu when clicked outside
+  const categoiresMenuRef = useRef(null);
+  useOutsideClick(categoiresMenuRef, () => setShowCategory(false));
+
   return (
     <div className="navbar unselectable">
       <div className="navbar-container">
@@ -79,16 +95,13 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
         <div>
           <div className="search-box">
-            <input
-              type="text"
-              onChange={(e) => handleChange(e.target.value)}
-              placeholder="toys, health, sports..."
-            />
-            <div className="search_btn ">
-              <span>search</span>
-            </div>
+            <input type="text" onChange={handleChange} placeholder="toys, health, sports..." value={phrase} />
           </div>
-          <div>{showSearchBox && <SearchBox results={searchResponse} />}</div>
+          {showSearchBox && (
+            <div ref={searchResultsBoxRef}>
+              <SearchBox results={searchResponse} />
+            </div>
+          )}
         </div>
         <div className="navbar-options">
           <div className="navbar-account">
@@ -97,11 +110,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <div>{user.uid !== undefined ? "Account" : "Log in"}</div>
             </span>
           </div>
-          <Link
-            href="/basket"
-            onClick={() => closeMenu()}
-            className="navbar-icon-link"
-          >
+          <Link href="/basket" onClick={() => closeMenu()} className="navbar-icon-link">
             <Cart className="icon" height="18" />
             <div>
               Basket <span className="goods-amount">{basket.items.length}</span>
@@ -109,14 +118,12 @@ const Navbar: React.FC<NavbarProps> = ({
           </Link>
         </div>
         <div className="burger-menu">
-          <MenuBurger
-            height={24}
-            onClick={() => setShowPhoneMenu(!showPhoneMenu)}
-          />
+          <MenuBurger height={24} onClick={() => setShowPhoneMenu(!showPhoneMenu)} />
         </div>
       </div>
       <div className="category-container">
         <div
+          ref={categoiresMenuRef}
           className="categories"
           onClick={() => {
             setShowCategory(!showCategory);
@@ -133,7 +140,6 @@ const Navbar: React.FC<NavbarProps> = ({
           basketLength={basket.items.length}
           accountRedirect={accountRedirect}
           hideMenu={hideMobileMenu}
-          search={handleChange}
         />
       )}
     </div>

@@ -6,7 +6,7 @@ interface SearchBoxProps {
 }
 
 const SearchBox: React.FC<SearchBoxProps> = ({ results }) => {
-  return <div className="search-box">jdddddd</div>;
+  return <div className="search-box-results">{results.status}</div>;
 };
 
 export default SearchBox;

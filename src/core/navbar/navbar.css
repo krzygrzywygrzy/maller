@@ -32,6 +32,7 @@
   width: 35vw;
   padding: 0.5rem;
   display: flex;
+  width: 30vw;
 }
 
 .search-box > div {
@@ -190,7 +191,14 @@ li:hover,
   font-weight: 400;
 }
 
-.search-box {
+.search-box-results {
+  position: absolute;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e6e6e6;
+  border-top: none;
+  z-index: 1000;
+  background: white;
+  width: calc(30vw - 1rem);
 }
 
 @media (max-width: 1000px) {

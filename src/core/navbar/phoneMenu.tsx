@@ -21,7 +21,7 @@ interface MobileMenuProps {
   basketLength: number;
   accountRedirect(): void;
   hideMenu(): void;
-  search(phrase: string): void;
+
   categories: Array<Category>;
   setSearchByAction(searchBy: SearchBy): void;
 }
@@ -30,7 +30,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   basketLength,
   accountRedirect,
   hideMenu,
-  search,
   categories,
   setSearchByAction,
 }) => {
@@ -74,7 +73,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             className="loop"
             onClick={() => {
               hideMenu();
-              search(phrase);
+              
             }}
           />
         </div>
