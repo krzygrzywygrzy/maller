@@ -9,6 +9,8 @@ interface Product {
   docId?: string;
   comments?: Array<Comment>;
   path?: string;
+  category?: string;
+  subcategory?: string;
 }
 
 export default Product;

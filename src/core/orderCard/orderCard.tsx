@@ -14,8 +14,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ index, order }) => {
       <div className="order-card-header">
         <div className="order-index">{index + 1}</div>
         <div>
-          Payment Status:{" "}
-          <span className="order-status">{order.paymentStatus}</span>
+          Payment Status: <span className="order-status">{order.paymentStatus}</span>
         </div>
         <div>
           Shipment Status: <span className="order-status">teavelling...</span>
@@ -23,9 +22,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ index, order }) => {
       </div>
       <div className="order-card-items">
         {order.basket.items.map((item, i) => {
-          return (
-            <OrderCardImg key={i} imgSource={item.image} alt={Image.name} />
-          );
+          return <OrderCardImg key={i} imgSource={item.image} alt={Image.name} />;
         })}
       </div>
     </div>
@@ -58,3 +55,4 @@ const OrderCardImg: React.FC<OrderCardImgProps> = ({ imgSource, alt }) => {
 };
 
 export default OrderCard;
+export { OrderCardImg };

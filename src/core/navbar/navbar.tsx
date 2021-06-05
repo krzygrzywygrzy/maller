@@ -15,7 +15,7 @@ import MobileMenu from "./phoneMenu";
 //icons
 import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
-import useSearchInDB from "../../services/useSearchInDB";
+import useSearchInDB from "../../services/useSearchInDB.js";
 import SearchBox from "./searchBox";
 import useOutsideClick from "../functions/useOutsideClick";
 

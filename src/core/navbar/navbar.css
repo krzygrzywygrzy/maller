@@ -193,12 +193,29 @@ li:hover,
 
 .search-box-results {
   position: absolute;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   border: 1px solid #e6e6e6;
   border-top: none;
   z-index: 1000;
   background: white;
-  width: calc(30vw - 1rem);
+  width: calc(30vw + 1rem);
+}
+
+.search-result-card {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  padding: 0.25rem 1rem;
+
+  cursor: pointer;
+}
+.search-result-card:hover {
+  background: #e6e6e6;
+}
+
+.search-result-card-info {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 1000px) {
