@@ -49,6 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
     setPhrase(e.target.value);
   };
 
+
   //close menu when phrase is empty
   useEffect(() => {
     if (phrase.length === 0) setShowSearchBox(false);

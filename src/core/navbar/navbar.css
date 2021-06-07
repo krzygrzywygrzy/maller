@@ -218,6 +218,10 @@ li:hover,
   flex-direction: column;
 }
 
+.search-loading {
+  margin: 0 1rem;
+}
+
 @media (max-width: 1000px) {
   .navbar-container {
     width: 100%;

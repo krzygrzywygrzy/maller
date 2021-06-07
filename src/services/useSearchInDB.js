@@ -8,10 +8,10 @@ const useSearchInDB = (phrase) => {
   useEffect(() => {
     const search = async () => {
       try {
-        if(phrase.length > 3){
-        const query = await index.search(phrase);
-        setStatus("success");
-        setData(query.hits);
+        if (phrase > 4) {
+          const query = await index.search(phrase, { attributesToRetrieve: ["objectID", "name", "category", "image"] });
+          setStatus("success");
+          setData(query.hits);
         }
       } catch (e) {
         setStatus("error");

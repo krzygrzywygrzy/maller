@@ -8,17 +8,23 @@ interface SearchBoxProps {
 const SearchBox: React.FC<SearchBoxProps> = ({ results }) => {
   return (
     <div className="search-box-results">
-      {results.data.map((item) => {
-        return (
-          <div className="search-result-card">
-            <OrderCardImg alt={item.name} imgSource={item.image} />{" "}
-            <div className="search-result-card-info">
-              <span>{item.name}</span>
-              <span>Category: {item.category}</span>
-            </div>
-          </div>
-        );
-      })}
+      {results.status === "success" ? (
+        <div>
+          {results.data.map((item, index) => {
+            return (
+              <div className="search-result-card" key={index}>
+                <OrderCardImg alt={item.name} imgSource={item.image} />{" "}
+                <div className="search-result-card-info">
+                  <span>{item.name}</span>
+                  <span>Category: {item.category}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="search-loading">loading...</div>
+      )}
     </div>
   );
 };
