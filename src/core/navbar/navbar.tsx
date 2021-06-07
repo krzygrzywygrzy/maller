@@ -84,6 +84,9 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
     setShowPhoneMenu(false);
   };
 
+  const hideSearchBox = () => {
+    setShowSearchBox(false);
+  }
   //hide categories menu when clicked outside
    const categoiresMenuRef = useRef(null);
   // useOutsideClick(categoiresMenuRef, () => setShowCategory(false));
@@ -100,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
           </div>
           {showSearchBox && (
             <div ref={searchResultsBoxRef}>
-              <SearchBox results={searchResponse} />
+              <SearchBox results={searchResponse} hideMenu={hideSearchBox} />
             </div>
           )}
         </div>
