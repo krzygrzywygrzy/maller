@@ -1,5 +1,5 @@
 interface BasketItem {
-  path: string;
+  objectID: string;
   amount: number;
   name: string;
   image?: string | undefined;

@@ -50,9 +50,9 @@ ReactDOM.render(
             <Route path="/profile">
               <ProfilePage />
             </Route>
-            <Route path="/item/:docId">
+            <Route path="/item/:objectID">
               {(params) => {
-                return <ItemPage docId={params.docId}></ItemPage>;
+                return <ItemPage objectId={params.objectID}></ItemPage>;
               }}
             </Route>
             <Route path="/summary">

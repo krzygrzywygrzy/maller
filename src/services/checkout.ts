@@ -22,25 +22,14 @@ const checkoutService = async (
           }),
         });
 
-      //decrease amount of items in db
-      for (let i = 0; i < basket.items.length; i++)
-        decreaseItemAmount(basket.items[i].path);
+      //TODO: decrease amount of items in db
+      
     }
   } catch {
     //TODO:
   }
 
   return "success";
-};
-
-/**
- * decreases amount of item in db
- * @param path -> path to the product
- */
-const decreaseItemAmount = (path: string) => {
-  db.doc(path).update({
-    inStock: firebase.firestore.FieldValue.increment(-1),
-  });
 };
 
 export default checkoutService;

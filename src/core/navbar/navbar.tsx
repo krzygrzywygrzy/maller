@@ -85,8 +85,8 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
   };
 
   //hide categories menu when clicked outside
-  const categoiresMenuRef = useRef(null);
-  useOutsideClick(categoiresMenuRef, () => setShowCategory(false));
+   const categoiresMenuRef = useRef(null);
+  // useOutsideClick(categoiresMenuRef, () => setShowCategory(false));
 
   return (
     <div className="navbar unselectable">

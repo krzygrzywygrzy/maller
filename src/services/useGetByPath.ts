@@ -14,7 +14,7 @@ const useGetByPath = (payload: Array<BasketItem>) => {
         let arr: Array<Product> = [];
         setStatus("pending");
         for (let i = 0; i <= payload.length - 1; i++) {
-          let item = await getByPath(payload[i].path);
+          let item = await getByPath(payload[i].objectID);
           if (item instanceof DbError) {
             setStatus("error");
             break;

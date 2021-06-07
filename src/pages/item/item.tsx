@@ -4,13 +4,13 @@ import CommentCard from "../../core/commentCard/commentCard";
 import Basket, { BasketItem } from "../../models/basket";
 import SearchBy from "../../models/searchBy";
 import useGetImageUrl from "../../services/useGetImageUrl";
-import useGetSpecificItem from "../../services/useGetSpecificItem";
+import useGetItemByObjectID from "../../services/useGetItemByObjectID";
 import { basketAddAction } from "../../store/actions/shoppingBasketActions";
 import { rootState } from "../../store/reducers/rootReducer";
 import "./item.css";
 
 interface ItemPageProps {
-  docId: string;
+  objectId: string;
   searchBy: SearchBy;
   addToBasket(item: BasketItem): void;
   basket: Basket;
@@ -18,20 +18,22 @@ interface ItemPageProps {
 }
 
 const ItemPage: React.FC<ItemPageProps> = ({
-  docId,
-  searchBy,
+  objectId,
   addToBasket,
   basket,
   addAmountToBasket,
 }: ItemPageProps) => {
-  const response = useGetSpecificItem(docId, searchBy);
+  const item: any = useGetItemByObjectID(objectId);
+
   const [amount, setAmount] = useState<number>(1);
 
-  const imageUrl = useGetImageUrl(response.item?.image);
+
+  
+  const imageUrl = useGetImageUrl(item.data.image);
 
   useEffect(() => {
-    document.title = `${response.item?.name}`;
-  }, [response]);
+    document.title = `${item.data.name}`;
+  }, [item]);
 
   const changeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newAmount = parseInt(e.target.value);
@@ -43,7 +45,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
     //check if product is in basket & assign index of it if exists
     let index: number | undefined;
     for (let i = 0; i < basket.items.length; i++) {
-      if (basket.items[i].path === response.item?.path) {
+      if (basket.items[i].objectID === item.data.objectID) {
         index = i;
         break;
       }
@@ -53,33 +55,32 @@ const ItemPage: React.FC<ItemPageProps> = ({
     if (index !== undefined) addAmountToBasket(amount, index);
     //else add new item to basket
     else {
-      if (response.item?.path)
         addToBasket({
           amount,
-          path: response.item?.path,
-          name: response.item.name,
-          image: response.item.image,
-          price: response.item.price,
+          objectID: item.data.objectID,
+          name: item.data.name,
+          image: item.data.image,
+          price: item.data.price,
         });
     }
   };
 
   return (
     <div className="container unselectable">
-      {response.status === "success" ? (
+      {item.status === "success" ? (
         <div className="product-display">
-          <div className="product-name">{response.item?.name} </div>
+          <div className="product-name">{item.data.name} </div>
           <div className="mid-section">
             <div className="mid-section-photos">
-              {response.item?.image && imageUrl !== "" ? (
-                <img src={imageUrl} alt={response.item.name} />
+              {item.data.image && imageUrl !== "" ? (
+                <img src={imageUrl} alt={item.data.name} />
               ) : (
                 <div className="no-img">No image provided</div>
               )}
             </div>
             <div className="mid-section-buy">
               <div className="buy-price">
-                <span>{response.item?.price}$</span>
+                <span>{item.data.price}$</span>
               </div>
               <div className="buy-form">
                 <input
@@ -91,7 +92,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
                 ></input>
                 <button onClick={() => handleBasket()}>Add to basket</button>
               </div>
-              <span>in stock: {response.item?.inStock}</span>
+              <span>in stock: {item.data.inStock}</span>
               <div className="buy-form-additional">
                 <span>Order in 2 hours to collect on Moneday</span>
                 <br></br>
@@ -102,35 +103,26 @@ const ItemPage: React.FC<ItemPageProps> = ({
             <div className="section-title">
               <span>Description</span>
             </div>
-            {response.item?.description ? (
-              <div
-                className="desctipion-content"
-                dangerouslySetInnerHTML={{ __html: response.item.description }}
-              ></div>
+            {item.data.description ? (
+              <div className="desctipion-content" dangerouslySetInnerHTML={{ __html: item.data.description }}></div>
             ) : (
               <span>Description for this product is not provided yet!</span>
             )}
           </div>
           <div className="opinions">
             <div className="section-title">Opinions</div>
-            {response.item?.comments ? (
+            {item.data.comments && item.data.comments.length > 0 ? (
               <div>
-                {response.item?.comments?.map((item, index) => {
+                {item.data.comments.map((item, index) => {
                   return (
                     <div key={index}>
-                      <CommentCard
-                        name={item.name}
-                        content={item.content}
-                        rating={item.rating}
-                      />
+                      <CommentCard name={item.name} content={item.content} rating={item.rating} />
                     </div>
                   );
                 })}
               </div>
             ) : (
-              <span className="desctipion-content">
-                No one have given feedback yet!
-              </span>
+              <span className="desctipion-content">No one have given feedback yet!</span>
             )}
           </div>
         </div>
