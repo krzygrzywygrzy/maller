@@ -2,7 +2,7 @@ footer {
   background: #373f51;
   color: white;
   font-weight: 400;
-  width: 100vw;
+  width: calc(100% - 2rem);
   padding: 1rem;
 }
 

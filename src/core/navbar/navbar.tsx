@@ -116,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
         </div>
         <div>
           <div className="search-box">
-            <input type="text" onChange={handleChange} placeholder="toys, health, sports..." value={phrase} />
+            <input type="text" onChange={handleChange} placeholder="music, books..." value={phrase} />
             <Loop height="18" onClick={() => setLocation(`/results/${phrase}`)} />
           </div>
           {showSearchBox && (
