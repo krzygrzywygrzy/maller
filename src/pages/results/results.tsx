@@ -11,16 +11,13 @@ interface ResultsPageProps {
   query?: string;
 }
 
-const ResultsPage: React.FC<ResultsPageProps> = ({
-  searchBy,
-  query,
-}: ResultsPageProps) => {
+const ResultsPage: React.FC<ResultsPageProps> = ({ searchBy, query }: ResultsPageProps) => {
   useEffect(() => {
     document.title = `results - ${query}`;
   }, [query]);
 
   const results = useResults(query);
-  
+
   return (
     <div>
       <div className="container">
@@ -32,7 +29,11 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
               })}
             </div>
           ) : (
-            <div className="empty-list ">nothing found</div>
+            <div className="empty-list">
+              <span>nothing found</span>
+              <br />
+              try to form your search differently!
+            </div>
           )
         ) : (
           <div className="loading">
@@ -41,9 +42,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({
         )}
       </div>
       {results.state === "success" && results.items.length > 0 && (
-        <div className="results-side-menu">
-          {/* <span>Filters</span> */}
-        </div>
+        <div className="results-side-menu">{/* <span>Filters</span> */}</div>
       )}
     </div>
   );

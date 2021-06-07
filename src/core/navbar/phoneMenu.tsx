@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { rootState } from "../../store/reducers/rootReducer";
 import Category from "../../models/categories";
 import { Link } from "wouter";
-import SearchBy, { SearchBySubcategory } from "../../models/searchBy";
+import SearchBy, { SearchByCategory, SearchBySubcategory } from "../../models/searchBy";
 import { setSearchByAction } from "../../store/actions/searchByActions";
 
 //icons
@@ -62,18 +62,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     <div className="phone-menu">
       <div className="phone-menu-container">
         <div className="phone-menu-item phone-menu-search">
-          <input
-            type="text"
-            placeholder="search..."
-            value={phrase}
-            onChange={(e) => setPhrase(e.target.value)}
-          />
+          <input type="text" placeholder="search..." value={phrase} onChange={(e) => setPhrase(e.target.value)} />
+
           <Loop
             height={18}
             className="loop"
             onClick={() => {
               hideMenu();
-              
+              setLocation(`/results/${phrase}`);
             }}
           />
         </div>
@@ -107,11 +103,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               {categories.map((item, index) => {
                 return (
                   <div key={index}>
-                    <div
-                      className="phone-menu-item drop-down-menu"
-                      onClick={() => toogleMenu(index)}
-                    >
-                      <div>{item.main}</div>
+                    <div className="phone-menu-item drop-down-menu" onClick={() => toogleMenu(index)}>
+                      <Link
+                        href={`/results/${item.main}`}
+                        onClick={() => {
+                          setSearchByAction(new SearchByCategory(item.main));
+                          hideMenu();
+                        }}
+                      >
+                        <div>{item.main}</div>
+                      </Link>
                       <div>
                         {/* {!dropDownMenus[index] ? (
                           <ArrowUp height="16" />
@@ -126,14 +127,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                           return (
                             <Link
                               key={i}
-                              href="/results"
+                              href={`/results/${item}`}
                               onClick={() => {
-                                setSearchByAction(
-                                  new SearchBySubcategory(
-                                    categories[index].main,
-                                    item
-                                  )
-                                );
+                                setSearchByAction(new SearchBySubcategory(categories[index].main, item));
                                 hideMenu();
                               }}
                             >
@@ -162,8 +158,7 @@ const mapStateToProps = (state: rootState) => {
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    setSearchByAction: (searchBy: SearchBy) =>
-      dispatch(setSearchByAction(searchBy)),
+    setSearchByAction: (searchBy: SearchBy) => dispatch(setSearchByAction(searchBy)),
   };
 };
 

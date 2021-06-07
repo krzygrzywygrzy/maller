@@ -18,6 +18,14 @@
   font-size: 1.1rem;
 }
 
+.empty-list {
+  margin: 0 1rem;
+}
+
+.empty-list > span {
+  font-size: 1.5rem;
+}
+
 @media (max-width: 1000px) {
   .product-grid {
     grid-template-columns: 1fr 1fr;

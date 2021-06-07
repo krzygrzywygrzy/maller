@@ -11,13 +11,14 @@ import User from "../../models/user";
 import { useLocation } from "wouter";
 import { ReactComponent as MenuBurger } from "../../assets/icons/menu.svg";
 import MobileMenu from "./phoneMenu";
+import useSearchInDB from "../../services/useSearchInDB.js";
+import SearchBox from "./searchBox";
+import useOutsideClick from "../functions/useOutsideClick";
 
 //icons
 import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
-import useSearchInDB from "../../services/useSearchInDB.js";
-import SearchBox from "./searchBox";
-import useOutsideClick from "../functions/useOutsideClick";
+import { ReactComponent as Loop } from "../../assets/icons/loop.svg";
 
 interface NavbarProps {
   basket: Basket;
@@ -43,12 +44,11 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
   const searchResponse = useSearchInDB(phrase);
 
   //react to phrase change
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!showSearchBox) setShowSearchBox(true);
     setShowCategory(false);
     setPhrase(e.target.value);
   };
-
 
   //close menu when phrase is empty
   useEffect(() => {
@@ -59,7 +59,6 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
   const searchResultsBoxRef = useRef(null);
   useOutsideClick(searchResultsBoxRef, () => {
     setShowSearchBox(false);
-    setPhrase("");
   });
 
   /**
@@ -86,10 +85,28 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
 
   const hideSearchBox = () => {
     setShowSearchBox(false);
-  }
+  };
   //hide categories menu when clicked outside
-   const categoiresMenuRef = useRef(null);
+  const categoiresMenuRef = useRef(null);
   // useOutsideClick(categoiresMenuRef, () => setShowCategory(false));
+
+  //click Enter to search
+  useEffect(() => {
+    const enterSearch = (e) => {
+      if (e.key === "Enter") {
+        setLocation(`/results/${phrase}`);
+        setShowSearchBox(false);
+      }
+    };
+
+    if (showSearchBox) {
+      document.addEventListener("keypress", enterSearch);
+    }
+
+    return () => {
+      document.removeEventListener("keypress", enterSearch);
+    };
+  }, [showSearchBox, phrase, setLocation, setShowSearchBox]);
 
   return (
     <div className="navbar unselectable">
@@ -100,6 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
         <div>
           <div className="search-box">
             <input type="text" onChange={handleChange} placeholder="toys, health, sports..." value={phrase} />
+            <Loop height="18" onClick={() => setLocation(`/results/${phrase}`)} />
           </div>
           {showSearchBox && (
             <div ref={searchResultsBoxRef}>
@@ -140,11 +158,7 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
       </div>
       {showCategory && <CategoryList close={closeMenu} />}
       {showPhoneMenu && (
-        <MobileMenu
-          basketLength={basket.items.length}
-          accountRedirect={accountRedirect}
-          hideMenu={hideMobileMenu}
-        />
+        <MobileMenu basketLength={basket.items.length} accountRedirect={accountRedirect} hideMenu={hideMobileMenu} />
       )}
     </div>
   );

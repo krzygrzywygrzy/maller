@@ -86,6 +86,7 @@ input[type="number"] {
   margin-left: 1rem;
   font-weight: 400;
   cursor: pointer;
+  z-index: 50;
 }
 
 .basket-summary {
