@@ -6,9 +6,8 @@ interface Product {
   price: number;
   inStock?: number;
   image?: string; // base64 string image
-  docId?: string;
+  objectID?: string;
   comments?: Array<Comment>;
-  path?: string;
   category?: string;
   subcategory?: string;
 }

@@ -28,6 +28,7 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 0.75rem;
+  cursor: pointer;
 }
 
 .basket-item:hover {

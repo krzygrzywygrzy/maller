@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Product from "../../models/product";
 import "./productCard.css";
 import { Link } from "wouter";
@@ -13,9 +13,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }: ProductCardProps) => {
   const img = useGetImageUrl(product.image);
 
+  useEffect(() => {
+    console.log(product);
+  }, [product]);
+
   return (
     <div className="product-card">
-      <Link href={`/item/${product.docId}`}>
+      <Link href={`/item/${product.objectID}`}>
         <div className="product-img">
           {product.image && img !== "" ? (
             <img alt={product.name} src={img} />

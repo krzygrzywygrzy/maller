@@ -38,8 +38,8 @@ ReactDOM.render(
             <Route path="/basket">
               <BasketPage />
             </Route>
-            <Route path="/results">
-              <ResultsPage />
+            <Route path="/results/:query">
+              {(params) => { return <ResultsPage query={params.query} />}}
             </Route>
             <Route path="/signup">
               <SignUpPage />

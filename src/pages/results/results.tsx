@@ -4,28 +4,30 @@ import ProductCard from "../../core/productCard/productCard";
 import "./results.css";
 import { rootState } from "../../store/reducers/rootReducer";
 import SearchBy from "../../models/searchBy";
-import useSearchResults from "../../services/useSearchResults";
+import useResults from "../../services/useResults";
 
 interface ResultsPageProps {
   searchBy: SearchBy;
+  query?: string;
 }
 
 const ResultsPage: React.FC<ResultsPageProps> = ({
   searchBy,
+  query,
 }: ResultsPageProps) => {
   useEffect(() => {
-    document.title = "results";
-  }, []);
+    document.title = `results - ${query}`;
+  }, [query]);
 
-  const results = useSearchResults(searchBy);
-
+  const results = useResults(query);
+  
   return (
     <div>
       <div className="container">
-        {results.state === "success" ? (
-          results.items.length > 0 ? (
+        {results.status === "success" ? (
+          results.data.length > 0 ? (
             <div className="product-grid">
-              {results.items.map((item, index) => {
+              {results.data.map((item, index) => {
                 return <ProductCard product={item} key={index} />;
               })}
             </div>

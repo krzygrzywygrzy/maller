@@ -27,8 +27,6 @@ const ItemPage: React.FC<ItemPageProps> = ({
 
   const [amount, setAmount] = useState<number>(1);
 
-
-  
   const imageUrl = useGetImageUrl(item.data.image);
 
   useEffect(() => {

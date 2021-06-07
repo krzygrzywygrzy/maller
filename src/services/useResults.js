@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
 import { index } from "./firebase.config";
 
-const useGetItemByObjectID = (objectID) => {
+const useResults = (phrase) => {
   const [status, setStatus] = useState("idle");
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const get = async () => {
       try {
         setStatus("pending");
-        const query = await index.getObject(objectID);
+        const query = await index.search(phrase, { attributesToRetrieve: ["objectID", "name", "price", "image"] });
+        setData(query.hits);
         setStatus("success");
-        setData(query);
       } catch (err) {
         setStatus("error");
       }
     };
 
     get();
-  }, [objectID]);
+  }, [phrase]);
 
-  return { status, data };
+  return { data, status };
 };
 
-export default useGetItemByObjectID;
+export default useResults;

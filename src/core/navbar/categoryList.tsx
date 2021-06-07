@@ -12,11 +12,7 @@ interface CategoryListProps {
   setSearchByAction(searchBy: SearchBy): Function;
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({
-  categories,
-  close,
-  setSearchByAction,
-}: CategoryListProps) => {
+const CategoryList: React.FC<CategoryListProps> = ({ categories, close, setSearchByAction }: CategoryListProps) => {
   const [subcat, setSub] = useState<any | null>(null);
 
   useEffect(() => {
@@ -73,13 +69,10 @@ const CategoryList: React.FC<CategoryListProps> = ({
                 return (
                   <Link
                     key={index}
-                    href={`/results`}
+                    href={`/results/${categories[subcat].sub[index]}`}
                     onClick={() => {
                       setSearchByAction(
-                        new SearchBySubcategory(
-                          categories[subcat].main,
-                          categories[subcat].sub[index]
-                        )
+                        new SearchBySubcategory(categories[subcat].main, categories[subcat].sub[index])
                       );
                       close();
                     }}
@@ -104,8 +97,7 @@ const mapStateToProps = (state: rootState) => {
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    setSearchByAction: (searchBy: SearchBy) =>
-      dispatch(setSearchByAction(searchBy)),
+    setSearchByAction: (searchBy: SearchBy) => dispatch(setSearchByAction(searchBy)),
   };
 };
 
