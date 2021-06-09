@@ -14,7 +14,7 @@ const HeaderMain: React.FC<HeaderMainProps> = ({ data }) => {
     <Link href={`/item/${data?.link}`}>
       <div className="home-header-main">
         <div className="header-main-image">
-          <img src={image} alt="image" />
+          <img src={image} alt="img" />
         </div>
         <div className="header-main-content">
             <div className="header-main-content-title">{data?.title}</div>
