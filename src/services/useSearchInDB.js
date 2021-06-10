@@ -15,7 +15,9 @@ const useSearchInDB = (phrase) => {
       try {
         if (phrase.length > 2) {
           setStatus("pending");
-          const query = await index.search(phrase, { attributesToRetrieve: ["objectID", "name", "category", "image"] });
+          const query = await index.search(phrase, {
+            attributesToRetrieve: ["objectID", "name", "category", "image"],
+          });
           setStatus("success");
           setData(query.hits);
         }

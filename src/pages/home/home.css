@@ -15,8 +15,6 @@
 .home-header-main {
     cursor: pointer;
     display: flex;
-
-
 }
 
 .header-main-image {
@@ -37,4 +35,33 @@
 .header-main-content-title {
   font-size: 1.25rem;
   font-weight: 400;
+}
+
+.header-main-content-title:hover {
+  text-decoration: underline;
+}
+
+.bottom-link {
+  justify-self: right;
+  align-self: flex-end;
+
+  display: flex;
+  align-items: center;
+}
+
+.header-main-content-bottom {
+  display: flex;
+  width: calc(100% - 3rem);
+  height: calc(100% - 3rem);
+}
+
+@keyframes arrowAnimation {
+  0% { left: 0;}
+  75% {left: .25rem;}
+  100% {left: 0;}
+}
+
+.arrow {
+  position: relative;
+  animation: arrowAnimation 1s infinite;
 }

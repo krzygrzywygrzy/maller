@@ -40,19 +40,20 @@ const ItemPage: React.FC<ItemPageProps> = ({
   };
 
   const handleBasket = () => {
-    //check if product is in basket & assign index of it if exists
-    let index: number | undefined;
-    for (let i = 0; i < basket.items.length; i++) {
-      if (basket.items[i].objectID === item.data.objectID) {
-        index = i;
-        break;
+    if (amount > 0) {
+      //check if product is in basket & assign index of it if exists
+      let index: number | undefined;
+      for (let i = 0; i < basket.items.length; i++) {
+        if (basket.items[i].objectID === item.data.objectID) {
+          index = i;
+          break;
+        }
       }
-    }
 
-    //if product is in basket change its amount
-    if (index !== undefined) addAmountToBasket(amount, index);
-    //else add new item to basket
-    else {
+      //if product is in basket change its amount
+      if (index !== undefined) addAmountToBasket(amount, index);
+      //else add new item to basket
+      else {
         addToBasket({
           amount,
           objectID: item.data.objectID,
@@ -60,6 +61,7 @@ const ItemPage: React.FC<ItemPageProps> = ({
           image: item.data.image,
           price: item.data.price,
         });
+      }
     }
   };
 
@@ -102,7 +104,10 @@ const ItemPage: React.FC<ItemPageProps> = ({
               <span>Description</span>
             </div>
             {item.data.description ? (
-              <div className="desctipion-content" dangerouslySetInnerHTML={{ __html: item.data.description }}></div>
+              <div
+                className="desctipion-content"
+                dangerouslySetInnerHTML={{ __html: item.data.description }}
+              ></div>
             ) : (
               <span>Description for this product is not provided yet!</span>
             )}
@@ -114,13 +119,19 @@ const ItemPage: React.FC<ItemPageProps> = ({
                 {item.data.comments.map((item, index) => {
                   return (
                     <div key={index}>
-                      <CommentCard name={item.name} content={item.content} rating={item.rating} />
+                      <CommentCard
+                        name={item.name}
+                        content={item.content}
+                        rating={item.rating}
+                      />
                     </div>
                   );
                 })}
               </div>
             ) : (
-              <span className="desctipion-content">No one have given feedback yet!</span>
+              <span className="desctipion-content">
+                No one have given feedback yet!
+              </span>
             )}
           </div>
         </div>

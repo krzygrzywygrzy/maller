@@ -12,7 +12,13 @@ interface BasketItemCardProps {
   changeAmount(index: number, amount: number): void;
 }
 
-const BasketItemCard: React.FC<BasketItemCardProps> = ({ item, amount, index, remove, changeAmount }) => {
+const BasketItemCard: React.FC<BasketItemCardProps> = ({
+  item,
+  amount,
+  index,
+  remove,
+  changeAmount,
+}) => {
   const image = useGetImageUrl(item.image);
 
   /**
@@ -23,29 +29,34 @@ const BasketItemCard: React.FC<BasketItemCardProps> = ({ item, amount, index, re
   };
 
   return (
-    <Link href={`/item/${item.objectID}`}>
-      <div className="basket-item">
-        <div className="basket-item-img">{image ? <img src={image} alt={item.name} /> : <span>No image</span>}</div>
-        <div className="basket-item-info">
+    <div className="basket-item">
+      <Link href={`/item/${item.objectID}`}>
+      <div className="basket-item-img">
+        {image ? <img src={image} alt={item.name} /> : <span>No image</span>}
+      </div>
+      </Link>
+      <div className="basket-item-info">
+        <Link href={`/item/${item.objectID}`}>
           <div className="item-info-title">{item.name}</div>
-          <div className="item-info-actions">
-            <div className="info-acitions-input">
-              <input type="number" value={amount} onChange={handleChange} />
-            </div>
-            <div>{item.price * amount}$</div>
-            <div className="info-acitions-delete" onClick={() => remove(index)}>
-              x
-            </div>
+        </Link>
+        <div className="item-info-actions">
+          <div className="info-acitions-input">
+            <input type="number" value={amount} onChange={handleChange} />
+          </div>
+          <div>{item.price * amount}$</div>
+          <div className="info-acitions-delete" onClick={() => remove(index)}>
+            x
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    changeAmount: (index: number, amount: number) => dispatch({ type: "CHANGE_AMOUNT", payload: { index, amount } }),
+    changeAmount: (index: number, amount: number) =>
+      dispatch({ type: "CHANGE_AMOUNT", payload: { index, amount } }),
   };
 };
 
