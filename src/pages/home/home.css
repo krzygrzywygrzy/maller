@@ -75,6 +75,10 @@
   font-weight: 400;
 }
 
+.header-sub-title:hover {
+  text-decoration: underline;
+}
+
 @keyframes arrowAnimation {
   0% {
     left: 0;
@@ -115,7 +119,6 @@
     height: 30vh;
   }
 
-  
   .header-main-content {
     margin-right: 0;
     width: calc(100% - 2rem);
@@ -124,7 +127,7 @@
   header-sub-img {
     height: 60%;
   }
-  
+
   home-header-sub {
     height: 35vh;
   }

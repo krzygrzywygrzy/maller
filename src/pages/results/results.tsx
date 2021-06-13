@@ -16,7 +16,12 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ searchBy, query }: ResultsPag
     document.title = `results - ${query}`;
   }, [query]);
 
+  
   const results = useResults(query);
+
+  useEffect(() => {
+    console.log(searchBy);
+  }, [searchBy]);
 
   return (
     <div>
@@ -32,7 +37,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ searchBy, query }: ResultsPag
             <div className="empty-list">
               <span>nothing found</span>
               <br />
-              try to form your search differently!
+              Attention! Only music category is filled with products by far!
             </div>
           )
         ) : (
