@@ -13,8 +13,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({ results, hideMenu }) => {
       {results.status === "success" ? (
         <div>
           {results.data.length > 0 ? (
-            results.data.map((item, index) => {
-              return (
+            results.data.map((item: any, index: number) => {
+             if(index < 5) return (
                 <Link
                   key={index}
                   href={`/item/${item.objectID}`}
@@ -29,6 +29,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ results, hideMenu }) => {
                   </div>
                 </Link>
               );
+              else return <></>;
             })
           ) : (
             <div className="search-loading">no results...</div>
