@@ -19,15 +19,18 @@ import useOutsideClick from "../functions/useOutsideClick";
 import { ReactComponent as Cart } from "../../assets/icons/cart.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as Loop } from "../../assets/icons/loop.svg";
+import SearchBy, { SearchByPhrase } from "../../models/searchBy";
+import { setSearchByAction } from "../../store/actions/searchByActions";
 
 interface NavbarProps {
   basket: Basket;
   categories: Array<Category>;
   user: User;
   getCategories(): void;
+  setSearchByAction(searchBy: SearchBy): void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user }: NavbarProps) => {
+const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user, setSearchByAction }: NavbarProps) => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [showPhoneMenu, setShowPhoneMenu] = useState<boolean>(false);
   const [showSearchBox, setShowSearchBox] = useState<boolean>(false);
@@ -94,6 +97,7 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
   useEffect(() => {
     const enterSearch = (e) => {
       if (e.key === "Enter") {
+        setSearchByAction(new SearchByPhrase(phrase));
         setLocation(`/results/${phrase}`);
         setShowSearchBox(false);
       }
@@ -106,7 +110,7 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
     return () => {
       document.removeEventListener("keypress", enterSearch);
     };
-  }, [showSearchBox, phrase, setLocation, setShowSearchBox]);
+  }, [showSearchBox, phrase, setLocation, setShowSearchBox, setSearchByAction]);
 
   return (
     <div className="navbar unselectable">
@@ -117,7 +121,13 @@ const Navbar: React.FC<NavbarProps> = ({ basket, categories, getCategories, user
         <div>
           <div className="search-box">
             <input type="text" onChange={handleChange} placeholder="music, books..." value={phrase} />
-            <Loop height="18" onClick={() => setLocation(`/results/${phrase}`)} />
+            <Loop
+              height="18"
+              onClick={() => {
+                setSearchByAction(new SearchByPhrase(phrase));
+                setLocation(`/results/${phrase}`);
+              }}
+            />
           </div>
           {showSearchBox && (
             <div ref={searchResultsBoxRef}>
@@ -175,6 +185,7 @@ const mapStateToProps = (state: rootState) => {
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     getCategories: () => dispatch(getCategoryAction()),
+    setSearchByAction: (searchBy: SearchBy) => dispatch(setSearchByAction(searchBy)),
   };
 };
 

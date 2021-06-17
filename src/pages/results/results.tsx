@@ -16,13 +16,14 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ searchBy, query }: ResultsPag
     document.title = `results - ${query}`;
   }, [query]);
 
-  
   const results = useResults(query);
 
   useEffect(() => {
     console.log(searchBy);
   }, [searchBy]);
 
+  
+  
   return (
     <div>
       <div className="container">

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { rootState } from "../../store/reducers/rootReducer";
 import Category from "../../models/categories";
 import { Link } from "wouter";
-import SearchBy, { SearchByCategory, SearchBySubcategory } from "../../models/searchBy";
+import SearchBy, { SearchByCategory, SearchByPhrase, SearchBySubcategory } from "../../models/searchBy";
 import { setSearchByAction } from "../../store/actions/searchByActions";
 
 //icons
@@ -69,6 +69,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             className="loop"
             onClick={() => {
               hideMenu();
+              setSearchByAction(new SearchByPhrase(phrase));
               setLocation(`/results/${phrase}`);
             }}
           />
